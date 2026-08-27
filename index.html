@@ -5,169 +5,274 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Inkflow</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=DM+Sans:wght@300;400;500;600&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&display=swap');
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    /* Permanent Dark Sidebar & Tabs - Slate / Charcoal Palette */
-    --sidebar-bg: #1e1f22;
-    --sidebar-hover: #2b2d31;
-    --sidebar-active: #3b82f6;
-    --sidebar-text: #949ba4;
-    --sidebar-text-bright: #dbdee1;
-    --sidebar-border: rgba(0,0,0,0.2);
-    --tab-bg: #1e1f22;
-    --tab-active-bg: #ffffff;
+    /* Professional 2010s Brushed Metal / Silver Palette */
+    --sidebar-bg: linear-gradient(to bottom, #e1e3e6 0%, #c9ccd1 100%);
+    --sidebar-hover: rgba(0, 0, 0, 0.05);
+    --sidebar-active: linear-gradient(to bottom, #5ba4fc 0%, #1e7aeb 100%);
+    --sidebar-text: #3c3f42;
+    --sidebar-text-bright: #000000;
+    --sidebar-border: #abb0b7;
+    --tab-bg: linear-gradient(to bottom, #d6d8db 0%, #bebfb2 100%);
+    --tab-active-bg: #faf9f6;
     
-    /* Workspace - Light Theme Defaults */
-    --canvas-bg: #ffffff;
-    --card-bg: #f2f3f5;
-    --toolbar-bg: #ffffff;
-    --toolbar-border: #e3e5e8;
-    --toolbar-item-hover: #ebedef;
-    --toolbar-icon: #4f5660;
-    --toolbar-icon-hover: #060607;
-    --toolbar-group-border: #e3e5e8;
-    --dot-color: rgba(0,0,0,0.05);
-    --text: #2e3338;
-    --ink-color: #060607;
-    --shadow: 0 1px 4px rgba(0,0,0,0.1);
+    /* Workspace - Light Theme Defaults (Crisp White/Cream Paper) */
+    --canvas-bg: #faf9f6;
+    --card-bg: #ffffff;
+    --toolbar-bg: linear-gradient(to bottom, #f0f0f2 0%, #d5d6da 100%);
+    --toolbar-border: #a2a3a7;
+    --toolbar-item-hover: linear-gradient(to bottom, #ffffff 0%, #eaebee 100%);
+    --toolbar-icon: #3a3b3e;
+    --toolbar-icon-hover: #000000;
+    --toolbar-group-border: #b0b2b6;
+    --dot-color: rgba(0, 100, 200, 0.05); /* Clean ruled paper lines */
+    --text: #2e3033;
+    --ink-color: #0c0d0e;
+    --shadow: 0 2px 5px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.08);
     
     /* Vibrant Palette */
-    --p-red: #ff8787;
-    --p-orange: #f59f00;
-    --p-yellow: #fcc419;
-    --p-green: #69db7c;
-    --p-blue: #4dadf7;
-    --p-indigo: #748ffc;
-    --p-purple: #9775fa;
-    --p-pink: #faa2c1;
-    --accent: #3b82f6;
-    --accent-soft: rgba(59, 130, 246, 0.1);
+    --p-red: #d9534f;
+    --p-orange: #f0ad4e;
+    --p-yellow: #f0ad4e;
+    --p-green: #5cb85c;
+    --p-blue: #337ab7;
+    --p-indigo: #5856d6;
+    --p-purple: #8e54d3;
+    --p-pink: #d8689c;
+    --accent: #1e7aeb;
+    --accent-soft: rgba(30, 122, 235, 0.12);
   }
 
   [data-theme="dark"] {
-    /* Workspace - Dark Theme - Much Darker */
-    --canvas-bg: #141517;
-    --card-bg: #1e1f22;
-    --toolbar-bg: #141517;
-    --toolbar-border: #000000;
-    --toolbar-item-hover: #2b2d31;
-    --toolbar-icon: #b5bac1;
+    /* Workspace - Dark Theme (Titanium / Slate) */
+    --sidebar-bg: linear-gradient(to bottom, #2b2c2e 0%, #1e1f20 100%);
+    --sidebar-hover: rgba(255, 255, 255, 0.05);
+    --sidebar-active: linear-gradient(to bottom, #3a82e6 0%, #1952a3 100%);
+    --sidebar-text: #a0a2a6;
+    --sidebar-text-bright: #ffffff;
+    --sidebar-border: #141517;
+    --tab-active-bg: #1c1d1f;
+    --canvas-bg: #1c1d1f;
+    --card-bg: #27282b;
+    --toolbar-bg: linear-gradient(to bottom, #363739 0%, #222325 100%);
+    --toolbar-border: #101112;
+    --toolbar-item-hover: linear-gradient(to bottom, #48494b 0%, #2e2f31 100%);
+    --toolbar-icon: #b2b4b8;
     --toolbar-icon-hover: #ffffff;
-    --toolbar-group-border: #000000;
-    --dot-color: rgba(255,255,255,0.08);
+    --toolbar-group-border: #161718;
+    --dot-color: rgba(0, 0, 0, 0.2); /* Dark ruled lines (absolutely no white lines in dark mode) */
     --text: #dbdee1;
     --ink-color: #ffffff;
-    --shadow: 0 4px 15px rgba(0,0,0,0.6);
-    --tab-active-bg: #141517;
+    --shadow: 0 4px 10px rgba(0,0,0,0.4);
   }
 
   html, body {
     height: 100%;
-    font-family: 'DM Sans', sans-serif;
+    font-family: "Lucida Grande", "Lucida Sans Unicode", "Helvetica Neue", Helvetica, "Segoe UI", Arial, sans-serif;
     overflow: hidden;
-    background: var(--sidebar-bg);
+    background: #eef0f3;
     color: var(--text);
-    transition: background 0.3s, color 0.3s;
+    transition: color 0.2s;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
   }
+
+  [data-theme="dark"] body {
+    background: #141517;
+  }
   
-  /* ── Home Screen ── */
+  /* ── Home Screen (Clean iOS/OS X Grey Linen Desk Texture) ── */
   .home-screen {
     flex: 1;
     overflow-y: auto;
-    background: var(--canvas-bg);
-    padding: 60px 80px;
+    background-color: #dbdcde !important;
+    background-image: 
+      linear-gradient(90deg, rgba(0,0,0,0.035) 50%, transparent 50%),
+      linear-gradient(rgba(0,0,0,0.035) 50%, transparent 50%) !important;
+    background-size: 3px 3px !important;
+    padding: 40px 60px;
     display: none;
+    box-shadow: inset 0 2px 8px rgba(0,0,0,0.12) !important;
   }
   .home-screen.active { display: block; }
-  .home-title { font-size: 32px; font-weight: 700; margin-bottom: 40px; letter-spacing: -0.5px; }
-  .home-grid { display: block; }
-  .home-card { 
-    background: var(--card-bg); 
-    border: 1px solid var(--toolbar-border);
-    border-radius: 16px;
-    padding: 24px;
-    cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  
+  [data-theme="dark"] .home-screen {
+    background-color: #17181a !important;
+    background-image: 
+      linear-gradient(90deg, rgba(0,0,0,0.2) 50%, transparent 50%),
+      linear-gradient(rgba(0,0,0,0.2) 50%, transparent 50%) !important;
+    background-size: 3px 3px !important;
+    box-shadow: inset 0 3px 12px rgba(0,0,0,0.5) !important;
   }
-  .home-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-color: var(--accent); }
-  .card-type { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--sidebar-text); margin-bottom: 8px; }
-  .card-title { font-size: 18px; font-weight: 600; margin-bottom: 12px; }
-  .card-meta { font-size: 12px; color: var(--sidebar-text); }
+  
+  .home-title { 
+    font-size: 27px; 
+    font-weight: 700; 
+    color: #2e3033;
+    text-shadow: 0 1px 0 #ffffff;
+    margin-bottom: 30px; 
+    letter-spacing: -0.5px; 
+  }
+  [data-theme="dark"] .home-title {
+    color: #dbdee1;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.8);
+  }
 
-  /* ── Home Screen Tree Layout ── */
+  .home-grid { display: block; }
+
+  /* ── Home Screen Notebook groups ── */
   .home-tree {
     display: flex;
     flex-direction: column;
-    gap: 32px;
+    gap: 30px;
     max-width: 1000px;
     margin: 0 auto;
   }
+  
   .home-notebook-group {
-    background: var(--card-bg);
-    border-radius: 20px;
-    padding: 30px;
-    border: 1px solid var(--toolbar-border);
+    background: #ffffff !important;
+    border-radius: 6px !important;
+    padding: 20px 24px !important;
+    border: 1px solid #c4c6ca !important;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08) !important;
+    position: relative;
   }
+  [data-theme="dark"] .home-notebook-group {
+    background: #202124 !important;
+    border-color: #121314 !important;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.25) !important;
+  }
+  
   .home-notebook-header {
     display: flex;
     align-items: center;
-    gap: 14px;
-    margin-bottom: 24px;
-    padding-bottom: 14px;
-    border-bottom: 1px solid var(--toolbar-border);
+    gap: 10px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ebecf0 !important;
   }
+  [data-theme="dark"] .home-notebook-header {
+    border-bottom-color: #2d2e30 !important;
+  }
+  
   .home-notebook-title {
-    font-size: 22px;
+    font-size: 16px;
     font-weight: 700;
-    color: var(--text);
+    color: #2e3033 !important;
   }
+  [data-theme="dark"] .home-notebook-title {
+    color: #dbdee1 !important;
+  }
+
   .home-notebook-dot {
-    width: 14px;
-    height: 14px;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.2);
   }
+  
+  .card-meta {
+    font-size: 12px;
+    color: #72767d;
+  }
+  
   .home-note-list {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 20px;
   }
+  
+  /* note cards styled like index cards */
   .home-note-card {
-    background: var(--canvas-bg);
-    border: 1px solid var(--toolbar-border);
-    border-radius: 12px;
-    padding: 20px;
+    --book-color-raw: var(--book-color, #a23535);
+    background: #ffffff !important;
+    border: 1px solid #c8c9cd !important;
+    border-top: 3px solid var(--book-color-raw) !important; 
+    border-radius: 4px !important;
+    padding: 15px !important;
     cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    height: 110px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08) !important;
+    transition: transform 0.15s, box-shadow 0.15s !important;
+    position: relative;
   }
+  [data-theme="dark"] .home-note-card {
+    background: #27282b !important;
+    border-color: #101112 !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.15) !important;
+  }
+  
   .home-note-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow);
-    border-color: var(--accent);
+    transform: translateY(-3px) !important;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.12) !important;
+    z-index: 5;
   }
+  
   .home-note-title {
-    font-size: 15px;
+    background: transparent !important;
+    color: #2e3033 !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    font-family: "Lucida Grande", "Lucida Sans Unicode", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 13.5px !important;
+    margin-top: 0;
+    text-align: left !important;
+    white-space: normal !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+  [data-theme="dark"] .home-note-title {
+    color: #dbdee1 !important;
+  }
+  
+  .home-note-meta {
+    font-size: 11px;
     font-weight: 600;
-    margin-bottom: 6px;
-    color: var(--text);
+    color: #72767d;
+    text-align: left;
+    margin-top: auto;
   }
-  .home-note-meta {
-    font-size: 12px;
-    color: var(--sidebar-text);
+
+  /* Dashed Card for creating new notes */
+  .home-note-card.new-note-btn {
+    background: #fafbfc !important;
+    border: 1.5px dashed #c0c2c6 !important;
+    border-top: 1.5px dashed #c0c2c6 !important;
+    box-shadow: none !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #5a5d62 !important;
+    font-weight: 600;
+    font-size: 13px;
+    height: 110px;
   }
-  [data-theme="dark"] .home-note-meta {
-    color: var(--sidebar-text);
+  [data-theme="dark"] .home-note-card.new-note-btn {
+    background: #1d1e22 !important;
+    border-color: #313337 !important;
+    color: #b5bac1 !important;
   }
-  .home-note-meta {
-    color: #666; /* Better contrast in light mode */
+  .home-note-card.new-note-btn:hover {
+    background: #f1f3f5 !important;
+    border-color: var(--accent) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.08) !important;
   }
-  [data-theme="dark"] .home-note-meta {
-    color: var(--sidebar-text);
+  [data-theme="dark"] .home-note-card.new-note-btn:hover {
+    background: #27282b !important;
   }
 
   /* ── Layout ── */
@@ -177,18 +282,31 @@
     width: 100vw;
   }
 
-  /* ── Sidebar ── */
+  /* ── Sidebar (Finder Brushed Aluminum Texture) ── */
   .sidebar {
     width: var(--sidebar-width, 200px);
     flex-shrink: 0;
-    background: var(--sidebar-bg);
+    background-color: #d8dadf !important;
+    background-image: 
+      linear-gradient(to right, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 100%),
+      repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.012) 0px, rgba(0, 0, 0, 0.012) 1px, transparent 1px, transparent 4px) !important;
     display: flex;
     position: relative;
-    border-right: 1px solid var(--sidebar-border);
+    border-right: 1px solid var(--sidebar-border) !important;
+    box-shadow: inset -1px 0 0 rgba(255,255,255,0.4), 1px 0 2px rgba(0,0,0,0.05) !important;
     user-select: none;
     -webkit-app-region: drag;
     transition: width 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   }
+  [data-theme="dark"] .sidebar {
+    background-color: #242527 !important;
+    background-image: 
+      linear-gradient(to right, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0) 100%),
+      repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.15) 0px, rgba(0, 0, 0, 0.15) 1px, transparent 1px, transparent 4px) !important;
+    border-right: 1px solid var(--sidebar-border) !important;
+    box-shadow: 1px 0 2px rgba(0,0,0,0.3) !important;
+  }
+  
   .sidebar.collapsed {
     width: 60px !important;
   }
@@ -230,7 +348,10 @@
     transition: background 0.2s;
   }
   .sidebar-resizer:hover, .sidebar-resizer.resizing {
-    background: var(--accent-soft);
+    background: rgba(0, 0, 0, 0.05);
+  }
+  [data-theme="dark"] .sidebar-resizer:hover {
+    background: rgba(255, 255, 255, 0.05);
   }
 
   .sidebar-inner {
@@ -245,22 +366,33 @@
   }
   .sidebar-inner::-webkit-scrollbar { display: none; }
 
+  /* Embossed Branding */
   .sidebar-brand {
     padding: 20px 18px 16px;
     display: flex;
     align-items: center;
     gap: 10px;
-    font-size: 17px;
-    font-weight: 600;
-    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    color: #2b2d31 !important;
+    text-shadow: 0 1px 0 #ffffff;
     letter-spacing: -0.3px;
-    border-bottom: 1px solid var(--sidebar-border);
+    border-bottom: 1px solid var(--sidebar-border) !important;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.4);
     margin-bottom: 6px;
+  }
+  [data-theme="dark"] .sidebar-brand {
+    color: #dbdee1 !important;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.8);
+    box-shadow: none;
   }
 
   .sidebar-brand .logo-icon {
-    color: var(--sidebar-active);
+    color: #4f5358;
     flex-shrink: 0;
+  }
+  [data-theme="dark"] .sidebar-brand .logo-icon {
+    color: #dbdee1;
   }
 
   .sidebar-section {
@@ -271,94 +403,147 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 4px 18px;
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--sidebar-text);
+    padding: 6px 18px;
+    font-size: 10.5px;
+    font-weight: 700;
+    color: #626569;
+    text-shadow: 0 1px 0 #ffffff;
     letter-spacing: 0.5px;
     text-transform: uppercase;
     margin-top: 10px;
     margin-bottom: 2px;
   }
+  [data-theme="dark"] .sidebar-section-header {
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.6);
+    color: #7f8185;
+  }
 
   .sidebar-section-header .add-btn {
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background: transparent;
+    border: 1px solid transparent;
+    color: #626569;
+    transition: background 0.15s, border-color 0.15s;
+    font-size: 12px;
+  }
+  .sidebar-section-header .add-btn:hover {
+    background: rgba(0,0,0,0.05);
+    border-color: rgba(0,0,0,0.1);
+    color: #111;
+  }
+  [data-theme="dark"] .sidebar-section-header .add-btn:hover {
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(255,255,255,0.1);
+    color: #fff;
+  }
+
+  /* Sidebar Icons Embossed 3D Silhouettes suitable for 2010s */
+  .nav-item svg {
+    color: #585b5e !important;
+    filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.8)) !important;
+    transition: color 0.1s, filter 0.1s;
+    width: 15px;
+    height: 15px;
+    stroke: none !important;
+    fill: currentColor !important;
+  }
+  [data-theme="dark"] .nav-item svg {
+    color: #a2a5a9 !important;
+    filter: drop-shadow(0 -1px 0 rgba(0, 0, 0, 0.9)) !important;
+  }
+  .nav-item.active svg {
+    filter: drop-shadow(0 -1px 0 rgba(0,0,0,0.4)) !important;
+    color: #ffffff !important;
+    fill: #ffffff !important;
+  }
+
+  /* Professional list items */
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--sidebar-text);
+    text-shadow: 0 1px 0 #ffffff;
+    cursor: pointer;
+    border-radius: 4px;
+    margin: 1px 8px;
+    border: 1px solid transparent;
+    transition: background 0.08s, border-color 0.08s;
+  }
+  [data-theme="dark"] .nav-item {
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.5);
+  }
+  .nav-item:hover {
+    background: rgba(0, 0, 0, 0.04);
+    color: var(--sidebar-text-bright);
+  }
+  [data-theme="dark"] .nav-item:hover {
+    background: rgba(255, 255, 255, 0.04);
+  }
+  
+  /* Selection Highlight */
+  .nav-item.active {
+    background: var(--sidebar-active) !important;
+    border: 1px solid rgba(0,0,0,0.1) !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 1px rgba(0, 0, 0, 0.08);
+    color: #ffffff !important;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3) !important;
+    font-weight: 600;
+  }
+
+  .notebook-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,0.1);
+  }
+
+  .sidebar-footer {
+    margin-top: auto;
+    padding: 10px 14px;
+    border-top: 1px solid var(--sidebar-border) !important;
+    box-shadow: 0 -1px 0 rgba(255,255,255,0.4) inset;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 4px;
+  }
+  [data-theme="dark"] .sidebar-footer {
+    box-shadow: none;
+    border-top-color: var(--sidebar-border) !important;
+  }
+
+  .footer-icon {
+    width: 26px;
+    height: 26px;
     border-radius: 4px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    background: transparent;
+    border: 1px solid transparent;
     color: var(--sidebar-text);
-    transition: background 0.15s, color 0.15s;
-    font-size: 15px;
-    line-height: 1;
-  }
-  .sidebar-section-header .add-btn:hover {
-    background: var(--sidebar-hover);
-    color: var(--sidebar-text-bright);
-  }
-
-  .nav-item {
-    display: flex;
-    align-items: center;
-    gap: 9px;
-    padding: 7px 18px;
-    font-size: 14px;
-    font-weight: 400;
-    color: var(--sidebar-text);
-    cursor: pointer;
-    border-radius: 6px;
-    margin: 1px 8px;
-    transition: background 0.12s, color 0.12s;
-  }
-  .nav-item:hover {
-    background: var(--sidebar-hover);
-    color: var(--sidebar-text-bright);
-  }
-  .nav-item.active {
-    background: var(--sidebar-active);
-    color: #fff;
-    font-weight: 500;
-  }
-  .nav-item svg {
-    flex-shrink: 0;
-    opacity: 0.7;
-  }
-  .nav-item.active svg {
-    opacity: 1;
-  }
-
-  .notebook-dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-
-  .sidebar-footer {
-    margin-top: auto;
-    padding: 12px 18px;
-    border-top: 1px solid var(--sidebar-border);
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-  }
-
-  .footer-icon {
-    width: 30px;
-    height: 30px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    color: var(--sidebar-text);
-    transition: background 0.12s, color 0.12s;
+    transition: background 0.12s, border-color 0.12s;
   }
   .footer-icon:hover {
-    background: var(--sidebar-hover);
+    background: rgba(0,0,0,0.05);
+    border-color: rgba(0,0,0,0.08);
     color: var(--sidebar-text-bright);
+  }
+  [data-theme="dark"] .footer-icon:hover {
+    background: rgba(255,255,255,0.05);
+    border-color: rgba(255,255,255,0.08);
   }
 
   /* ── Main content ── */
@@ -369,132 +554,207 @@
     overflow: hidden;
   }
 
-  /* ── Tab bar ── */
+  /* ── Tab Bar (OS X Finder Tab Bar layout) ── */
   .tab-bar {
     display: flex;
     align-items: flex-end;
-    background: var(--tab-bg);
-    padding: 8px 8px 0;
-    min-height: 40px;
+    background-color: #cbd0d4 !important;
+    background-image: 
+      linear-gradient(to bottom, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 100%),
+      repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.012) 0px, rgba(0, 0, 0, 0.012) 1px, transparent 1px, transparent 4px) !important;
+    border-bottom: 1px solid #9c9da2 !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.4);
+    padding: 5px 8px 0;
+    min-height: 35px;
     flex-shrink: 0;
     -webkit-app-region: drag;
+  }
+  [data-theme="dark"] .tab-bar {
+    background-color: #232426 !important;
+    background-image: 
+      linear-gradient(to bottom, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0) 100%),
+      repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.12) 0px, rgba(0, 0, 0, 0.12) 1px, transparent 1px, transparent 4px) !important;
+    border-bottom: 1px solid #101112 !important;
+    box-shadow: none;
   }
 
   .tabs {
     display: flex;
-      padding-right: 8px;
-
+    padding-right: 8px;
     align-items: flex-end;
     -webkit-app-region: no-drag;
     overflow-x: auto;
     scrollbar-width: none;
-    gap: 4px;
+    gap: 2px;
   }
   .tabs::-webkit-scrollbar { display: none; }
 
+  /* Elegant silver tabs */
   .tab {
     display: flex;
     align-items: center;
-    gap: 0;
-    padding: 0 20px;
-    height: 34px;
+    padding: 0 14px;
+    height: 28px;
     font-size: 12px;
-    font-weight: 500;
-    color: var(--sidebar-text);
+    font-weight: 600;
+    color: #4c4e52 !important;
+    text-shadow: 0 1px 0 #ffffff;
     cursor: pointer;
     white-space: nowrap;
-    transition: background 0.15s, color 0.15s;
-      width: 180px;
-  flex: 0 0 180px;   /* ← add this */
-
-    min-width: 120px;
-    max-width: 280px;
-    background: transparent;
+    transition: background 0.1s, color 0.1s;
+    width: 160px;
+    flex: 0 0 160px;
+    min-width: 100px;
+    max-width: 220px;
+    background: linear-gradient(to bottom, #eaebeb 0%, #d5d6d8 100%) !important;
     position: relative;
-    border: none;
+    border: 1px solid #9a9ba0 !important;
+    border-bottom: none !important;
     outline: none;
-    margin-right: -8px;
-    clip-path: polygon(8px 0, calc(100% - 8px) 0, 100% 100%, 0 100%);
-    -webkit-clip-path: polygon(8px 0, calc(100% - 8px) 0, 100% 100%, 0 100%);
+    margin-right: 1px;
+    border-radius: 4px 4px 0 0;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.5);
+    clip-path: none !important;
+    -webkit-clip-path: none !important;
+  }
+  [data-theme="dark"] .tab {
+    color: #a0a2a6 !important;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.5);
+    background: linear-gradient(to bottom, #3b3c3e 0%, #292a2b 100%) !important;
+    border-color: #161718 !important;
+    box-shadow: none;
   }
   .tab:hover { 
-    background: rgba(255,255,255,0.08); 
-    color: var(--sidebar-text-bright); 
+    background: linear-gradient(to bottom, #f2f3f4 0%, #dddee0 100%) !important;
+    color: #111 !important;
     z-index: 5;
   }
+  [data-theme="dark"] .tab:hover {
+    background: linear-gradient(to bottom, #454648 0%, #303132 100%) !important;
+    color: #fff !important;
+  }
+  
+  /* Active tab blends perfectly with canvas page */
   .tab.active {
-    background: var(--tab-active-bg);
-    color: var(--text);
+    background: var(--tab-active-bg) !important;
+    color: #111 !important;
+    box-shadow: inset 0 2px 0 var(--accent), 0 1px 0 var(--tab-active-bg) !important; 
+    border-color: #8c8d92 !important;
+    border-bottom: 1px solid var(--tab-active-bg) !important;
     z-index: 10;
+  }
+  [data-theme="dark"] .tab.active {
+    color: #fff !important;
+    border-color: #101112 !important;
+    box-shadow: inset 0 2px 0 var(--accent) !important; /* No white highlight line in active dark tab */
   }
   
   .tab svg {
     flex-shrink: 0;
     display: block;
-    margin-right: 8px;
+    margin-right: 6px;
+    color: #555;
+    opacity: 0.8;
+  }
+  [data-theme="dark"] .tab svg {
+    color: #aaa;
   }
 
-.tab span:not(.tab-close) {
-      outline: none;
+  .tab span:not(.tab-close) {
+    outline: none;
     padding: 2px 0;
     display: block;
     flex: 1;
     min-width: 0;
     overflow: hidden;
     text-overflow: ellipsis;
-      white-space: nowrap;   /* ← add this */
+    white-space: nowrap;
   }
 
   .tab-close {
-    width: 20px;
-    height: 20px;
-    border-radius: 4px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 16px;
-    line-height: 1;
-    color: var(--sidebar-text);
-    transition: background 0.12s, color 0.12s;
+    font-size: 10px;
+    color: #72767d;
+    transition: background 0.1s, color 0.1s;
     flex-shrink: 0;
     margin-left: auto;
   }
-  
-  .tab-close:hover { background: rgba(255,255,255,0.1); color: #fff; }
-  .tab.active .tab-close:hover { background: rgba(0,0,0,0.05); color: var(--text); }
+  .tab-close:hover { 
+    background: #e2e4e8; 
+    color: #111; 
+  }
+  [data-theme="dark"] .tab-close:hover {
+    background: #3e4042;
+    color: #fff;
+  }
 
-.tab-add {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 52px;
-  height: 26px;
-  font-size: 18px;
-  color: var(--sidebar-text);
-  cursor: pointer;
-  -webkit-app-region: no-drag;
-  transition: background 0.12s, color 0.12s;
-  background: rgba(255,255,255,0.06);
-  clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 100%, 6px 100%);
-  -webkit-clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 100%, 6px 100%);
-  margin-left: 0px;
-  margin-bottom: 6px;
-}
-.tab-add:hover {
-  background: rgba(255,255,255,0.14);
-  color: var(--sidebar-text-bright);
-}
+  /* Tab add button styled like a simple Finder segment */
+  .tab-add {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 22px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #4c4e52 !important;
+    text-shadow: 0 1px 0 #fff;
+    cursor: pointer;
+    -webkit-app-region: no-drag;
+    transition: background 0.12s, color 0.12s;
+    background: linear-gradient(to bottom, #ecebeb 0%, #c4c5c8 100%) !important;
+    border: 1px solid #9a9ba0 !important;
+    border-bottom: none !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.4);
+    border-radius: 3px 3px 0 0;
+    margin-left: 2px;
+    margin-bottom: 0px;
+    clip-path: none !important;
+    -webkit-clip-path: none !important;
+  }
+  [data-theme="dark"] .tab-add {
+    color: #a0a2a6 !important;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.5);
+    background: linear-gradient(to bottom, #3b3c3e 0%, #292a2b 100%) !important;
+    border-color: #161718 !important;
+    box-shadow: none;
+  }
+  .tab-add:hover {
+    background: linear-gradient(to bottom, #f2f3f4 0%, #dbdcde 100%) !important;
+    color: #111 !important;
+  }
+  [data-theme="dark"] .tab-add:hover {
+    background: linear-gradient(to bottom, #454648 0%, #303132 100%) !important;
+    color: #fff !important;
+  }
 
-  /* ── Toolbar ── */
+  /* ── Toolbar (Finder Satin metal look) ── */
   .toolbar {
     display: flex;
     align-items: center;
-    gap: 2px;
+    gap: 4px;
     padding: 5px 10px;
-    background: var(--toolbar-bg);
-    border-bottom: 1px solid var(--toolbar-border);
+    background-color: #d5d7db !important;
+    background-image: 
+      linear-gradient(rgba(255, 255, 255, 0.2) 1px, transparent 1px),
+      repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.012) 0px, rgba(0, 0, 0, 0.012) 1px, transparent 1px, transparent 4px) !important;
+    border-bottom: 1px solid var(--toolbar-border) !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 1px 2px rgba(0,0,0,0.05);
     flex-shrink: 0;
     user-select: none;
+  }
+  [data-theme="dark"] .toolbar {
+    background-color: #28292c !important;
+    background-image: 
+      linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.12) 0px, rgba(0, 0, 0, 0.12) 1px, transparent 1px, transparent 4px) !important;
+    border-bottom: 1px solid var(--toolbar-border) !important;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.3) !important;
   }
 
   .tool-group {
@@ -502,88 +762,145 @@
     align-items: center;
     gap: 2px;
     padding: 0 4px;
-    border-right: 1px solid var(--toolbar-group-border);
+    border-right: 1px solid var(--toolbar-group-border) !important;
   }
-  .tool-group:last-child { border-right: none; }
+  .tool-group:last-child { border-right: none !important; }
 
+  /* 2010s Solid Embossed Toolbar Icons */
+  .tool-btn svg, .footer-icon svg {
+    color: #4a4c50 !important;
+    fill: currentColor !important;
+    stroke: none !important;
+    width: 15px;
+    height: 15px;
+    transition: color 0.1s;
+  }
+  [data-theme="dark"] .tool-btn svg, [data-theme="dark"] .footer-icon svg {
+    color: #a2a5a9 !important;
+  }
+  .tool-btn.active svg {
+    color: #ffffff !important;
+    fill: #ffffff !important;
+    filter: drop-shadow(0 -1px 0 rgba(0,0,0,0.3)) !important;
+  }
+  /* Enforce outline for line-tool and custom SVG elements if necessary */
+  .tool-btn svg.line-tool-path, .footer-icon svg.outline-only, .tab svg {
+    fill: none !important;
+    stroke: currentColor !important;
+    stroke-width: 2.2px !important;
+  }
+
+  /* Elegant satin beveled buttons */
   .tool-btn {
-    width: 32px;
-    height: 32px;
-    border-radius: 7px;
+    width: 28px;
+    height: 26px;
+    border-radius: 3px;
+    border: 1px solid #9ea0a4 !important;
+    background: linear-gradient(to bottom, #ffffff 0%, #f0f1f3 50%, #e2e4e7 51%, #dcdfe2 100%) !important;
+    box-shadow: inset 0 1px 0 #ffffff, 0 1px 1px rgba(0,0,0,0.05);
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     position: relative;
-    transition: background 0.12s;
+    transition: transform 0.05s, box-shadow 0.05s;
     flex-shrink: 0;
   }
-  .tool-btn:hover { background: var(--toolbar-item-hover); }
-  .tool-btn.active {
-    background: var(--accent-soft);
+  .tool-btn:hover { 
+    background: linear-gradient(to bottom, #ffffff 0%, #f6f7f8 50%, #e7e9eb 51%, #e2e4e7 100%) !important;
+    border-color: #8c8e92 !important;
+    box-shadow: inset 0 1px 0 #ffffff, 0 1px 2px rgba(0,0,0,0.1);
   }
-  .tool-btn.active svg { color: var(--accent); }
-  .tool-btn svg { color: var(--toolbar-icon); }
-  .tool-btn:hover svg { color: var(--toolbar-icon-hover); }
+  .tool-btn:active {
+    transform: translateY(1px);
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.15), 0 1px 0 #fff;
+  }
+  
+  /* Pressed/Active: Clean selection blue highlight */
+  .tool-btn.active {
+    background: linear-gradient(to bottom, #63a9fc 0%, #2f87f2 50%, #1771e6 51%, #0b5ecc 100%) !important;
+    border-color: #0b59be !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.3), 0 1px 1px rgba(0,0,0,0.15) !important;
+  }
 
+  /* Dark Theme Toolbar styling */
+  [data-theme="dark"] .tool-btn {
+    background: linear-gradient(to bottom, #444547 0%, #353638 50%, #2b2c2d 51%, #222325 100%) !important;
+    border-color: #18191b !important;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.2); /* Removed white inset shadow in dark mode */
+  }
+  [data-theme="dark"] .tool-btn:hover {
+    background: linear-gradient(to bottom, #4d4e50 0%, #3c3d3f 50%, #303133 51%, #262729 100%) !important;
+    border-color: #0c0c0d !important;
+  }
+  [data-theme="dark"] .tool-btn.active {
+    background: linear-gradient(to bottom, #1d63c4 0%, #144ba3 50%, #0d3882 51%, #07275e 100%) !important;
+    border-color: #031533 !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.15), 0 1px 1px rgba(0,0,0,0.4) !important;
+  }
+
+  /* Color Swatches */
   .color-swatch {
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
     border-radius: 50%;
     cursor: pointer;
     margin: 0 2px;
     flex-shrink: 0;
-    transition: transform 0.12s, box-shadow 0.12s;
-    border: 2px solid transparent;
+    border: 1px solid rgba(0,0,0,0.3) !important;
+    box-shadow: inset 0 1px 1px rgba(255,255,255,0.2), 0 1px 1px rgba(0,0,0,0.1);
   }
-  .color-swatch:hover { transform: scale(1.15); }
-  .color-swatch.active { border-color: var(--accent); box-shadow: 0 0 0 2px var(--toolbar-bg) inset; }
+  .color-swatch:hover { transform: scale(1.1); }
+  .color-swatch.active { 
+    border-color: #000000 !important; 
+    box-shadow: 0 0 0 1.5px rgba(255,255,255,0.8), 0 1px 2px rgba(0,0,0,0.3);
+  }
 
-  /* ── Custom Slider ── */
+  /* 3D Metal Slider Dial */
   .size-slider {
     -webkit-appearance: none;
     appearance: none;
-    width: 60px;
+    width: 50px;
     height: 4px;
-    background: var(--toolbar-group-border);
+    background: #b5b7bb;
     border-radius: 2px;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,0.15), 0 1px 0 #fff;
     cursor: pointer;
-    margin: 0 8px;
+    margin: 0 6px;
     outline: none;
+  }
+  [data-theme="dark"] .size-slider {
+    background: #141517;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,0.4); /* Removed white drop line */
   }
   .size-slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
     width: 12px;
     height: 12px;
-    background: var(--accent);
+    background: linear-gradient(135deg, #ffffff 0%, #d8d8d8 45%, #b5b5b5 50%, #909090 100%);
+    border: 1px solid #7c7d82;
     border-radius: 50%;
-    border: 2px solid var(--toolbar-bg);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-    transition: transform 0.1s;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.3), inset 0 1px 0 #ffffff;
   }
   .size-slider::-webkit-slider-thumb:hover {
-    transform: scale(1.2);
-  }
-  .size-slider::-moz-range-thumb {
-    width: 12px;
-    height: 12px;
-    background: var(--accent);
-    border-radius: 50%;
-    border: 2px solid var(--toolbar-bg);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-    transition: transform 0.1s;
-    border: none;
+    transform: scale(1.1);
   }
 
   .toolbar-spacer { flex: 1; }
 
-  /* ── Canvas area ── */
+  /* ── Canvas area (Clean grey workspace surround) ── */
   .canvas-wrap {
     flex: 1;
     position: relative;
     overflow: hidden;
-    background: var(--canvas-bg);
+    background-color: #e5e6e8 !important;
+    background-image: none !important; /* Flat workspace desk */
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.15);
+  }
+  [data-theme="dark"] .canvas-wrap {
+    background-color: #141517 !important;
+    box-shadow: inset 0 2px 8px rgba(0,0,0,0.6);
   }
 
   #dot-canvas {
@@ -601,60 +918,94 @@
   #draw-canvas.panning { cursor: grab; }
   #draw-canvas.panning-active { cursor: grabbing; }
 
-  /* ── Zoom controls ── */
+  /* ── Zoom controls (Mac OS X Finder-style Segmented Control) ── */
   .zoom-controls {
     position: absolute;
-    bottom: 14px;
+    bottom: 16px;
     right: 16px;
     display: flex;
     align-items: center;
-    gap: 4px;
-    background: var(--toolbar-bg);
-    border-radius: 10px;
-    box-shadow: var(--shadow), 0 0 0 1px var(--sidebar-border);
-    padding: 4px 8px;
+    gap: 2px;
+    background: linear-gradient(to bottom, #ffffff 0%, #ececec 50%, #dcdcdc 51%, #cfd1d4 100%) !important;
+    border: 1px solid #929498 !important;
+    box-shadow: inset 0 1px 0 #ffffff, 0 2px 4px rgba(0,0,0,0.12) !important;
+    border-radius: 4px !important;
+    padding: 2px 4px !important;
     user-select: none;
     z-index: 10;
-    transition: background 0.3s;
+    height: 26px;
+  }
+  [data-theme="dark"] .zoom-controls {
+    background: linear-gradient(to bottom, #444547 0%, #353638 50%, #2b2c2e 51%, #202123 100%) !important;
+    border-color: #101112 !important;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.4) !important;
   }
 
   .zoom-btn {
-    width: 24px;
-    height: 24px;
-    border-radius: 6px;
+    width: 20px;
+    height: 20px;
+    border-radius: 2px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    font-size: 16px;
-    color: var(--toolbar-icon);
-    font-weight: 500;
-    transition: background 0.1s;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: #333 !important;
+    text-shadow: 0 1px 0 #fff;
   }
-  .zoom-btn:hover { background: var(--toolbar-item-hover); color: var(--toolbar-icon-hover); }
+  [data-theme="dark"] .zoom-btn {
+    color: #dbdee1 !important;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.5);
+  }
+  .zoom-btn:hover { 
+    background: rgba(0,0,0,0.06); 
+  }
+  [data-theme="dark"] .zoom-btn:hover {
+    background: rgba(255,255,255,0.06);
+  }
 
   .zoom-level {
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--toolbar-icon);
-    min-width: 38px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #333 !important;
+    text-shadow: 0 1px 0 #fff;
+    min-width: 34px;
     text-align: center;
     cursor: pointer;
   }
-  .zoom-level:hover { color: var(--accent); }
+  [data-theme="dark"] .zoom-level {
+    color: #dbdee1 !important;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.5);
+  }
+  .zoom-level:hover { color: var(--accent) !important; }
 
   .reset-btn {
-    width: 26px;
-    height: 26px;
-    border-radius: 6px;
+    width: 20px;
+    height: 20px;
+    border-radius: 2px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    color: var(--toolbar-icon);
-    transition: background 0.1s;
   }
-  .reset-btn:hover { background: var(--toolbar-item-hover); color: var(--toolbar-icon-hover); }
+  .reset-btn:hover { 
+    background: rgba(0,0,0,0.06); 
+  }
+  [data-theme="dark"] .reset-btn:hover {
+    background: rgba(255,255,255,0.06);
+  }
+  .reset-btn svg {
+    color: #333 !important;
+    fill: currentColor !important;
+    stroke: none !important;
+    width: 12px;
+    height: 12px;
+  }
+  [data-theme="dark"] .reset-btn svg {
+    color: #dbdee1 !important;
+  }
 
   /* ── Toolbar tip ── */
   .tool-tip {
@@ -662,15 +1013,18 @@
     bottom: 14px;
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(30,30,50,0.85);
+    background: rgba(40,40,45,0.9);
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
     color: white;
-    font-size: 12px;
-    padding: 5px 10px;
-    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 4px;
     pointer-events: none;
     z-index: 10;
     opacity: 0;
-    transition: opacity 0.2s;
+    transition: opacity 0.1s;
     white-space: nowrap;
   }
   .tool-tip.visible { opacity: 1; }
@@ -678,101 +1032,252 @@
   /* ── Scrollbars ── */
   ::-webkit-scrollbar { width: 6px; height: 6px; }
   ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb { 
+    background: rgba(0,0,0,0.15); 
+    border-radius: 3px; 
+  }
+  [data-theme="dark"] ::-webkit-scrollbar-thumb {
+    background: rgba(0,0,0,0.2);
+  }
+
   .nav-item:hover .delete-btn {
-    opacity: 0.6 !important;
+    opacity: 0.7 !important;
   }
   .nav-item .delete-btn:hover {
     opacity: 1 !important;
-    color: #ff6b6b;
+    color: #d9534f !important;
   }
 
-  /* ── Custom Modal ── */
+  /* ── 2010s Brushed Metal Modal ── */
   .modal-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.4);
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 1000;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.2s;
+    transition: opacity 0.15s;
   }
   .modal-overlay.active {
     opacity: 1;
     pointer-events: auto;
   }
   .modal {
-    background: var(--sidebar-bg);
-    border: 1px solid var(--sidebar-border);
-    border-radius: 12px;
+    background: linear-gradient(to bottom, #f2f3f5 0%, #dbdcdf 100%) !important;
+    border: 1px solid #8e9094 !important;
+    border-radius: 6px !important;
     width: 320px;
-    padding: 24px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-    transform: translateY(20px);
-    transition: transform 0.2s;
+    padding: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3), inset 0 1px 0 #ffffff !important;
+    transform: translateY(10px);
+    transition: transform 0.15s;
+  }
+  [data-theme="dark"] .modal {
+    background: linear-gradient(to bottom, #2e2f31 0%, #1e1f20 100%) !important;
+    border-color: #121314 !important;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5) !important; /* Removed white highlight */
   }
   .modal-overlay.active .modal {
     transform: translateY(0);
   }
   .modal-title {
-    font-size: 16px;
-    font-weight: 600;
-    color: #fff;
-    margin-bottom: 12px;
+    font-size: 15px;
+    font-weight: 700;
+    color: #2e3033;
+    text-shadow: 0 1px 0 #fff;
+    margin-bottom: 10px;
+  }
+  [data-theme="dark"] .modal-title {
+    color: #eee;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.5);
   }
   .modal-body {
-    font-size: 14px;
-    color: var(--sidebar-text);
-    margin-bottom: 20px;
-    line-height: 1.5;
+    font-size: 13px;
+    color: #58595c;
+    text-shadow: 0 1px 0 #fff;
+    margin-bottom: 18px;
+    line-height: 1.4;
+  }
+  [data-theme="dark"] .modal-body {
+    color: #b5bac1;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.5);
   }
   .modal-input {
     width: 100%;
-    background: #141517;
-    border: 1px solid var(--sidebar-border);
-    border-radius: 6px;
-    padding: 8px 12px;
-    color: #fff;
-    font-size: 14px;
-    margin-bottom: 20px;
+    background: #ffffff;
+    border: 1px solid #b2b4b8;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.08);
+    border-radius: 3px;
+    padding: 6px 8px;
+    color: #111;
+    font-size: 13px;
+    margin-bottom: 18px;
     outline: none;
   }
+  [data-theme="dark"] .modal-input {
+    background: #141517;
+    border-color: #111;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.4);
+    color: #eee;
+  }
   .modal-input:focus {
-    border-color: var(--sidebar-active);
+    border-color: #1e7aeb;
+    box-shadow: 0 0 3px rgba(30, 122, 235, 0.4), inset 0 1px 2px rgba(0,0,0,0.08);
   }
   .modal-actions {
     display: flex;
     justify-content: flex-end;
-    gap: 10px;
+    gap: 8px;
   }
   .modal-btn {
-    padding: 8px 16px;
-    border-radius: 6px;
-    font-size: 13px;
-    font-weight: 500;
+    padding: 6px 12px;
+    border-radius: 3px;
+    font-size: 12px;
+    font-weight: 600;
     cursor: pointer;
-    transition: background 0.12s;
-    border: none;
+    border: 1px solid #a2a3a7 !important;
+    transition: background 0.1s;
   }
   .modal-btn-cancel {
-    background: transparent;
-    color: var(--sidebar-text);
+    background: linear-gradient(to bottom, #ffffff 0%, #ececec 100%);
+    color: #444;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.04);
   }
   .modal-btn-cancel:hover {
-    background: var(--sidebar-hover);
-    color: #fff;
+    background: linear-gradient(to bottom, #ffffff 0%, #f0f0f0 100%);
   }
   .modal-btn-confirm {
-    background: var(--sidebar-active);
+    background: linear-gradient(to bottom, #63a9fc 0%, #1e7aeb 100%);
     color: #fff;
+    border-color: #1066cc !important;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.2);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.25), 0 1px 1px rgba(0,0,0,0.1);
   }
   .modal-btn-confirm:hover {
-    background: #6e62ff;
+    background: linear-gradient(to bottom, #7bb8ff 0%, #2f87f2 100%);
+  }
+  [data-theme="dark"] .modal-btn-cancel {
+    background: linear-gradient(to bottom, #444547 0%, #2f3032 100%);
+    color: #bbb;
+    border-color: #1a1b1c !important;
+  }
+  [data-theme="dark"] .modal-btn-cancel:hover {
+    background: linear-gradient(to bottom, #4f5052 0%, #3a3b3c 100%);
+  }
+
+  /* ── Command Palette Overlay ── */
+  .command-palette-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+    z-index: 10000;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 12vh;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.18s ease, visibility 0.18s ease;
+  }
+  .command-palette-backdrop.visible {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+  .command-palette-container {
+    width: 580px;
+    max-width: 90%;
+    background: var(--card-bg);
+    border: 1px solid var(--toolbar-border);
+    border-radius: 10px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+    transform: translateY(-20px) scale(0.97);
+    transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .command-palette-backdrop.visible .command-palette-container {
+    transform: translateY(0) scale(1);
+  }
+  .command-palette-search-wrap {
+    display: flex;
+    align-items: center;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--toolbar-border);
+    background: var(--toolbar-bg);
+  }
+  .command-palette-search-icon {
+    width: 20px;
+    height: 20px;
+    fill: var(--text);
+    opacity: 0.6;
+    margin-right: 12px;
+    flex-shrink: 0;
+  }
+  .command-palette-search-wrap input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    color: var(--text);
+    font-family: inherit;
+    font-weight: 500;
+  }
+  .command-palette-search-wrap input::placeholder {
+    color: var(--text);
+    opacity: 0.45;
+  }
+  .command-palette-results {
+    max-height: 320px;
+    overflow-y: auto;
+    padding: 8px 0;
+  }
+  .command-palette-group-header {
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--text);
+    opacity: 0.5;
+    font-weight: 700;
+    padding: 8px 18px 4px;
+  }
+  .command-palette-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 9px 18px;
+    cursor: pointer;
+    font-size: 13.5px;
+    color: var(--text);
+    transition: background 0.1s, color 0.1s;
+    font-weight: 500;
+  }
+  .command-palette-item:hover,
+  .command-palette-item.selected {
+    background: var(--sidebar-active);
+    color: #ffffff;
+  }
+  .command-palette-item:hover .command-palette-shortcut,
+  .command-palette-item.selected .command-palette-shortcut {
+    color: rgba(255, 255, 255, 0.8);
+  }
+  .command-palette-shortcut {
+    font-size: 11px;
+    opacity: 0.6;
+    color: var(--text);
+    font-weight: 400;
+    font-family: monospace, sans-serif;
   }
 </style>
+
 </head>
 <body>
 <div class="app">
@@ -782,7 +1287,7 @@
     <div class="sidebar-resizer" id="sidebar-resizer"></div>
     <div class="sidebar-inner">
       <div class="sidebar-brand">
-        <svg class="logo-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <svg class="logo-icon outline-only" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="fill:none !important;">
           <path d="M12 19l7-7 3 3-7 7-3-3z"/>
           <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/>
           <path d="M2 2l7.586 7.586"/>
@@ -792,27 +1297,27 @@
 
       <div class="sidebar-section">
         <div class="nav-item" data-nav="home" onclick="selectNav(this)">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
           <span>Home</span>
         </div>
         <div class="nav-item" data-nav="all" onclick="selectNav(this)">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12z"/></svg>
           <span>All Notes</span>
         </div>
         <div class="nav-item" data-nav="scratchpad" onclick="selectNav(this)">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
           <span>Scratchpad</span>
         </div>
         <div class="nav-item" data-nav="recent" onclick="selectNav(this)">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><polyline points="12 6 12 12 15.5 15.5"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
           <span>Recent</span>
         </div>
         <div class="nav-item" data-nav="starred" onclick="selectNav(this)">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
           <span>Starred</span>
         </div>
         <div class="nav-item" data-nav="trash" onclick="selectNav(this)">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
           <span>Trash</span>
         </div>
       </div>
@@ -835,20 +1340,13 @@
 
       <div class="sidebar-footer">
         <div class="footer-icon" title="Toggle Sidebar" onclick="toggleSidebar()">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="9" y1="3" x2="9" y2="21"/>
-          </svg>
+          <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H9V5h10v14z"/></svg>
         </div>
         <div class="footer-icon" title="Toggle Theme" onclick="toggleTheme()">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" id="theme-icon">
-            <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-          </svg>
+          <svg viewBox="0 0 24 24" id="theme-icon"><path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58a.996.996 0 0 0-1.41 0 .996.996 0 0 0 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37a.996.996 0 0 0-1.41 0 .996.996 0 0 0 0 1.41l1.06 1.06c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41l-1.06-1.06zm-12.37 1.06l1.06-1.06c.39-.39.39-1.03 0-1.41s-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0zm13.78-12.37l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06c.39-.39.39-1.03 0-1.41s-1.03-.39-1.41 0z"/></svg>
         </div>
         <div class="footer-icon" title="Settings" onclick="toggleSettings()">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-            <circle cx="12" cy="12" r="3"/>
-            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
-          </svg>
+          <svg viewBox="0 0 24 24"><path d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"/></svg>
         </div>
       </div>
     </div>
@@ -869,7 +1367,7 @@
     <div class="tab-bar" id="tab-bar">
       <div class="tabs" id="tabs">
         <div class="tab active" data-tab="0">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="opacity:0.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" style="opacity:0.8"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
           <span>Project ideas</span>
           <span class="tab-close" onclick="closeTab(event, 0)">×</span>
         </div>
@@ -882,100 +1380,86 @@
       <!-- Selection tool -->
       <div class="tool-group">
         <div class="tool-btn" id="tool-select" onclick="setTool('select')" title="Selection (S)">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-            <path d="M5 3l3.057 14.943 3.33-6.68 6.613-3.263z"/>
-            <path d="M12.5 12.5l4.5 4.5"/>
-          </svg>
+          <svg viewBox="0 0 24 24"><path d="M10.07 14.27l1.74 3.73-1.42.66-1.74-3.73-3.07 3.07V3l10.85 10.85h-6.36z"/></svg>
         </div>
       </div>
 
       <!-- Drawing tools -->
       <div class="tool-group">
-        <div class="tool-btn active" id="tool-pen" onclick="setTool('pen')" title="Pen">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-            <path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/>
-            <line x1="16" y1="8" x2="2" y2="22"/>
-            <line x1="17.5" y1="15" x2="9" y2="15"/>
-          </svg>
+        <div class="tool-btn active" id="tool-pen" onclick="setTool('pen')" title="Pen (P)">
+          <svg viewBox="0 0 24 24"><path d="M5.4 20C4.3 20 2 21.2 2 22c0 .4.4.4.6.3L5 20.7V20zm14-17.6c-4.4.2-9 2.5-12.2 6-3.2 3.6-4.5 8.1-4.7 10.6.9-.5 1.8-1.2 2.6-2 .7-.7 1.3-1.6 1.8-2.5-.5-.4-.9-.8-1.2-1.3l.8-.8c.4.4.8.8 1.3 1.2 1-.7 1.9-1.5 2.6-2.5-.5-.4-.9-.8-1.3-1.2l.8-.8c.4.4.8.8 1.2 1.3.8-.9 1.5-2 2-3.1-.5-.4-.9-.8-1.3-1.2l.8-.8c.4.4.8.8 1.2 1.2 1.1-1.8 1.7-4 1.8-6.1z"/></svg>
         </div>
-        <div class="tool-btn" id="tool-pencil" onclick="setTool('pencil')" title="Pencil">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-            <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/>
-          </svg>
+        <div class="tool-btn" id="tool-pencil" onclick="setTool('pencil')" title="Pencil (B)">
+          <svg viewBox="0 0 24 24"><path d="M19.7 4.3a2 2 0 0 0-2.8 0L14.7 6.5l2.8 2.8 2.2-2.2c.8-.8.8-2 0-2.8zM3 17.2V21h3.8l9.6-9.6-3.8-3.8L3 17.2zM5.5 20H4v-1.5l1.5 1.5z"/></svg>
         </div>
-        <div class="tool-btn" id="tool-marker" onclick="setTool('marker')" title="Marker / Highlighter">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-            <path d="M12 19l7-7 3 3-7 7-3-3z"/>
-            <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/>
-            <path d="M2 2l7.586 7.586"/>
-            <circle cx="11" cy="11" r="2"/>
-          </svg>
+        <div class="tool-btn" id="tool-marker" onclick="setTool('marker')" title="Marker / Highlighter (M)">
+          <svg viewBox="0 0 24 24"><path d="M6 2c-1.1 0-2 .9-2 2v14l3 3h10l3-3V4c0-1.1-.9-2-2-2H6zm8 14H8v-2h6v2zm2-4H8V8h8v4z"/></svg>
         </div>
-        <div class="tool-btn" id="tool-eraser" onclick="setTool('eraser')" title="Eraser">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-            <path d="M20 20H7L3 16l10-10 8 8-3 4z"/>
-            <path d="M6.0001 11L13 18"/>
-          </svg>
+        <div class="tool-btn" id="tool-eraser" onclick="setTool('eraser')" title="Eraser (E)">
+          <svg viewBox="0 0 24 24"><path d="M16.24 7.56l-5.66-5.66c-.78-.78-2.05-.78-2.83 0L2.09 7.56c-.78.78-.78 2.05 0 2.83l5.66 5.66c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l5.66-5.66c.79-.78.79-2.05 0-2.83zm-8.48 7.07L3.5 10.37 8.45 5.4l4.24 4.24-4.93 4.99zM22 20h-7l-2-2h9v2z"/></svg>
         </div>
       </div>
 
       <!-- Shape tools -->
       <div class="tool-group">
         <div class="tool-btn" id="tool-circle" onclick="setTool('circle')" title="Circle">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm0 18c-4.41 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/></svg>
         </div>
         <div class="tool-btn" id="tool-oval" onclick="setTool('oval')" title="Oval">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><ellipse cx="12" cy="12" rx="10" ry="6"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 4c-5.52 0-10 3.58-10 8s4.48 8 10 8 10-3.58 10-8-4.48-8-10-8zm0 14c-4.42 0-8-2.69-8-6s3.58-6 8-6 8 2.69 8 6-3.58 6-8 6z"/></svg>
         </div>
         <div class="tool-btn" id="tool-rect" onclick="setTool('rect')" title="Rectangle">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M19 5H5c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 12H5V7h14v10z"/></svg>
         </div>
         <div class="tool-btn" id="tool-line" onclick="setTool('line')" title="Line">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="19" x2="19" y2="5"/></svg>
+          <svg class="line-tool-path" viewBox="0 0 24 24"><line x1="5" y1="19" x2="19" y2="5"/></svg>
         </div>
         <div class="tool-btn" id="tool-text" onclick="setTool('text')" title="Text">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M5 4v3h5.5v12h3V7H19V4z"/></svg>
         </div>
       </div>
 
       <!-- Insert tools -->
       <div class="tool-group">
         <div class="tool-btn" title="Insert image" onclick="insertImage()">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-5.04-6.71l-2.75 3.54-1.96-2.36L6.5 17h11l-3.54-4.71z"/></svg>
         </div>
         <div class="tool-btn" title="Table">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="1"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="9" x2="9" y2="21"/><line x1="15" y1="9" x2="15" y2="21"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8 18H4v-4h8v4zm0-6H4v-4h8v4zm0-6H4V4h8v4zm8 12h-6v-4h6v4zm0-6h-6v-4h6v4zm0-6h-6V4h6v4z"/></svg>
         </div>
         <div class="tool-btn" title="Embed link">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg>
         </div>
         <div class="tool-btn" onclick="manageNoteTags()" title="Manage Tags">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M21.41 11.58l-9-9C12.05 2.22 11.53 2 11 2H4c-1.1 0-2 .9-2 2v7c0 .53.22 1.05.59 1.41l9 9c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7-7c.78-.78.78-2.05 0-2.83zM13 20l-9-9V4h7l9 9-7 7z"/><circle cx="6.5" cy="6.5" r="1.5"/></svg>
         </div>
       </div>
 
-      <!-- Undo / Redo / Clear -->
+      <!-- Undo / Redo / Clear / Export -->
       <div class="tool-group">
         <div class="tool-btn" onclick="undoStroke()" title="Undo (Ctrl+Z)">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="9 14 4 9 9 4"/><path d="M20 20v-7a4 4 0 0 0-4-4H4"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12.5 8c-2.65 0-5.05.99-6.9 2.6L2 7v9h9l-3.62-3.62c1.39-1.16 3.16-1.88 5.12-1.88 3.54 0 6.55 2.31 7.6 5.5l2.37-.78C21.08 11.03 17.15 8 12.5 8z"/></svg>
         </div>
         <div class="tool-btn" onclick="redoStroke()" title="Redo (Ctrl+Y)">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="15 14 20 9 15 4"/><path d="M4 20v-7a4 4 0 0 1 4-4h12"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M18.4 10.6C16.55 8.99 14.15 8 11.5 8c-4.65 0-8.58 3.03-9.96 7.22L3.9 16c1.05-3.19 4.06-5.5 7.6-5.5 1.96 0 3.73.72 5.12 1.88L13 16h9V7l-3.6 3.6z"/></svg>
         </div>
         <div class="tool-btn" onclick="clearCanvas()" title="Clear All">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M15 16h4v2h-4zm0-8h7v2h-7zm0 4h6v2h-6zM3 18c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V8H3v10zM14 5h-3l-1-1H6L5 5H2v2h12V5z"/></svg>
+        </div>
+        <div class="tool-btn" onclick="exportToImage()" title="Export Note as Image (Ctrl+E)">
+          <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
         </div>
       </div>
 
       <!-- Colors -->
       <div class="tool-group" id="color-group">
-        <div class="color-swatch active" style="background:var(--ink-color)" data-color="adaptive" onclick="setColor(this)" title="Adaptive Ink"></div>
-        <div class="color-swatch" style="background:var(--p-red)" data-color="var(--p-red)" onclick="setColor(this)" title="Pastel Red"></div>
-        <div class="color-swatch" style="background:var(--p-orange)" data-color="var(--p-orange)" onclick="setColor(this)" title="Pastel Orange"></div>
-        <div class="color-swatch" style="background:var(--p-yellow)" data-color="var(--p-yellow)" onclick="setColor(this)" title="Pastel Yellow"></div>
-        <div class="color-swatch" style="background:var(--p-green)" data-color="var(--p-green)" onclick="setColor(this)" title="Pastel Green"></div>
-        <div class="color-swatch" style="background:var(--p-blue)" data-color="var(--p-blue)" onclick="setColor(this)" title="Pastel Blue"></div>
-        <div class="color-swatch" style="background:var(--p-purple)" data-color="var(--p-purple)" onclick="setColor(this)" title="Pastel Purple"></div>
+        <div class="color-swatch active" style="background:var(--ink-color)" data-color="adaptive" onclick="setColor(this)" title="Adaptive Ink (1)"></div>
+        <div class="color-swatch" style="background:var(--p-red)" data-color="var(--p-red)" onclick="setColor(this)" title="Pastel Red (2)"></div>
+        <div class="color-swatch" style="background:var(--p-orange)" data-color="var(--p-orange)" onclick="setColor(this)" title="Pastel Orange (3)"></div>
+        <div class="color-swatch" style="background:var(--p-yellow)" data-color="var(--p-yellow)" onclick="setColor(this)" title="Pastel Yellow (4)"></div>
+        <div class="color-swatch" style="background:var(--p-green)" data-color="var(--p-green)" onclick="setColor(this)" title="Pastel Green (5)"></div>
+        <div class="color-swatch" style="background:var(--p-blue)" data-color="var(--p-blue)" onclick="setColor(this)" title="Pastel Blue (6)"></div>
+        <div class="color-swatch" style="background:var(--p-purple)" data-color="var(--p-purple)" onclick="setColor(this)" title="Pastel Purple (7)"></div>
       </div>
 
       <!-- Brush size -->
@@ -989,7 +1473,7 @@
       <!-- Pan hint -->
       <div class="tool-group" style="border-right:none;">
         <div class="tool-btn" id="tool-pan" onclick="setTool('pan')" title="Pan (Space + drag)">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 11V6a2 2 0 0 0-2-2 2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2 2 2 0 0 0-2 2v2"/><path d="M10 10.5a2 2 0 0 0-2-2 2 2 0 0 0-2 2v3"/><path d="M18 11a2 2 0 1 1 4 0v3a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M23 12c0-1.1-.9-2-2-2s-2 .9-2 2h-4V8h1.24c.73 0 1.25-.76.95-1.43l-3.25-7.25c-.32-.71-1.34-.71-1.66 0L8.8 6.57c-.3.67.22 1.43.95 1.43H11v4H7V8.76c0-.73-.76-1.25-1.43-.95L1.76 10.8c-.71.32-.71 1.34 0 1.66l3.81 1.71c.67.3 1.43-.22 1.43-.95V13h4v4H9.76c-.73 0-1.25.76-.95 1.43l3.25 7.25c.32.71 1.34.71 1.66 0l3.25-7.25c.3-.67-.22-1.43-.95-1.43H13v-4h4v1.24c0 .73.76 1.25 1.43.95l3.81-1.71c.71-.32.71-1.34 0-1.66z"/></svg>
         </div>
       </div>
     </div>
@@ -1006,7 +1490,7 @@
         <div class="zoom-btn" onclick="zoomIn()" title="Zoom in">+</div>
         <div style="width:1px;height:18px;background:#e0e0e8;margin:0 4px;"></div>
         <div class="reset-btn" onclick="resetView()" title="Reset view">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 6V2L8 6l4 4V6c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg>
         </div>
       </div>
 
@@ -1027,6 +1511,54 @@
       <button class="modal-btn modal-btn-cancel" id="modal-cancel">Cancel</button>
       <button class="modal-btn modal-btn-confirm" id="modal-confirm">Confirm</button>
     </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="export-modal-overlay">
+  <div class="modal" style="width: 320px;">
+    <div class="modal-title">Export High-Res PNG</div>
+    <div class="modal-body" style="margin-bottom: 12px;">
+      <div style="margin-bottom: 10px; font-weight: 500;" id="export-modal-info">Calculating bounds...</div>
+      
+      <div style="margin-bottom: 10px;">
+        <label style="display: block; font-weight: 600; margin-bottom: 4px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.8;">Resolution:</label>
+        <select class="modal-input" id="export-scale" style="margin-bottom: 0;">
+          <option value="1">1x (Standard)</option>
+          <option value="2">2x (Medium)</option>
+          <option value="3" selected>3x (High - Recommended)</option>
+          <option value="4">4x (Ultra)</option>
+        </select>
+      </div>
+
+      <div style="margin-bottom: 10px;">
+        <label style="display: block; font-weight: 600; margin-bottom: 4px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.8;">Background Style:</label>
+        <select class="modal-input" id="export-bg" style="margin-bottom: 0;">
+          <option value="theme-grid">Grid / Dots (Matches View)</option>
+          <option value="theme-solid">Solid Paper (No Grid)</option>
+          <option value="transparent">Transparent Background</option>
+        </select>
+      </div>
+
+      <div style="margin-bottom: 10px;">
+        <label style="display: block; font-weight: 600; margin-bottom: 4px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.8;">File Name:</label>
+        <input type="text" class="modal-input" id="export-filename" style="margin-bottom: 0;" />
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="modal-btn modal-btn-cancel" id="export-modal-cancel">Cancel</button>
+      <button class="modal-btn modal-btn-confirm" id="export-modal-confirm">Export</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── Command Palette Overlay ── -->
+<div id="command-palette-backdrop" class="command-palette-backdrop" onclick="closeCommandPalette(event)">
+  <div id="command-palette-container" class="command-palette-container" onclick="event.stopPropagation()">
+    <div class="command-palette-search-wrap">
+      <svg class="command-palette-search-icon" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" fill="currentColor"/></svg>
+      <input type="text" id="command-palette-input" placeholder="Type a command, tool or tab title..." autocomplete="off" spellcheck="false" />
+    </div>
+    <div id="command-palette-results" class="command-palette-results"></div>
   </div>
 </div>
 
@@ -1127,6 +1659,7 @@ let currentNotebookId = 'all';
 let sidebarSelection = 'all';
 let currentView = 'canvas'; 
 let theme = 'light';
+let bgGridStyle = localStorage.getItem('bgGridStyle') || 'ruled';
 let openTabs = [];
 
 // Interaction state
@@ -1189,145 +1722,108 @@ function showModal({ title, body, showInput = false, defaultValue = '', confirmT
 }
 
 // ═══════════════════════════════════════════════════════════
-// PERSISTENCE (IndexedDB)
+// PERSISTENCE (Server API)
 // ═══════════════════════════════════════════════════════════
 const db = {
-  dbName: 'InkflowDB',
-  version: 1,
-  instance: null,
-
-  async open() {
-    if (this.instance) return this.instance;
-    return new Promise((resolve, reject) => {
-      const request = indexedDB.open(this.dbName, this.version);
-      request.onupgradeneeded = (e) => {
-        const database = e.target.result;
-        if (!database.objectStoreNames.contains('meta')) database.createObjectStore('meta');
-        if (!database.objectStoreNames.contains('notes')) database.createObjectStore('notes');
-        if (!database.objectStoreNames.contains('images')) database.createObjectStore('images');
-      };
-      request.onsuccess = (e) => {
-        this.instance = e.target.result;
-        resolve(this.instance);
-      };
-      request.onerror = (e) => reject(e.target.error);
-    });
-  },
-
   async getMeta() {
-    const database = await this.open();
-    return new Promise((resolve, reject) => {
-      const tx = database.transaction('meta', 'readonly');
-      const store = tx.objectStore('meta');
-      const request = store.get('main');
-      request.onsuccess = () => resolve(request.result);
-      request.onerror = (e) => reject(e.target.error);
-    });
+    try {
+      const res = await fetch('/api/meta');
+      if (!res.ok) throw new Error('Failed to fetch meta');
+      return await res.json();
+    } catch (e) {
+      console.error(e);
+      return null;
+    }
   },
 
   async saveMeta(meta) {
-    const database = await this.open();
-    return new Promise((resolve, reject) => {
-      const tx = database.transaction('meta', 'readwrite');
-      const store = tx.objectStore('meta');
-      store.put(meta, 'main');
-      tx.oncomplete = () => resolve();
-      tx.onerror = (e) => reject(e.target.error);
-    });
+    try {
+      const res = await fetch('/api/meta', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(meta)
+      });
+      if (!res.ok) throw new Error('Failed to save meta');
+    } catch (e) {
+      console.error(e);
+    }
   },
 
   async getNote(id) {
-    const database = await this.open();
-    return new Promise((resolve, reject) => {
-      const tx = database.transaction('notes', 'readonly');
-      const store = tx.objectStore('notes');
-      const request = store.get(id);
-      request.onsuccess = () => resolve(request.result);
-      request.onerror = (e) => reject(e.target.error);
-    });
+    try {
+      const res = await fetch(`/api/notes/${id}`);
+      if (!res.ok) throw new Error('Failed to fetch note');
+      return await res.json();
+    } catch (e) {
+      console.error(e);
+      return null;
+    }
   },
 
   async saveNote(id, data) {
-    const database = await this.open();
-    return new Promise((resolve, reject) => {
-      const tx = database.transaction('notes', 'readwrite');
-      const store = tx.objectStore('notes');
-      store.put(data, id);
-      tx.oncomplete = () => resolve();
-      tx.onerror = (e) => reject(e.target.error);
-    });
+    try {
+      const res = await fetch(`/api/notes/${id}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      if (!res.ok) throw new Error('Failed to save note');
+    } catch (e) {
+      console.error(e);
+    }
   },
 
   async deleteNote(id) {
-    const database = await this.open();
-    return new Promise((resolve, reject) => {
-      const tx = database.transaction('notes', 'readwrite');
-      const store = tx.objectStore('notes');
-      store.delete(id);
-      tx.oncomplete = () => resolve();
-      tx.onerror = (e) => reject(e.target.error);
-    });
+    try {
+      const res = await fetch(`/api/notes/${id}`, {
+        method: 'DELETE'
+      });
+      if (!res.ok) throw new Error('Failed to delete note');
+    } catch (e) {
+      console.error(e);
+    }
   },
 
-  async saveImage(name, blob) {
-    const database = await this.open();
-    return new Promise((resolve, reject) => {
-      const tx = database.transaction('images', 'readwrite');
-      const store = tx.objectStore('images');
-      store.put(blob, name);
-      tx.oncomplete = () => resolve();
-      tx.onerror = (e) => reject(e.target.error);
+  async saveImage(file) {
+    const formData = new FormData();
+    formData.append('image', file);
+    const res = await fetch('/api/images', {
+      method: 'POST',
+      body: formData
     });
-  },
-
-  async getImage(name) {
-    const database = await this.open();
-    return new Promise((resolve, reject) => {
-      const tx = database.transaction('images', 'readonly');
-      const store = tx.objectStore('images');
-      const request = store.get(name);
-      request.onsuccess = () => resolve(request.result);
-      request.onerror = (e) => reject(e.target.error);
-    });
+    if (!res.ok) throw new Error('Failed to upload image');
+    return await res.json(); // returns { url, filename }
   },
 
   async exportAll() {
-    const database = await this.open();
-    const result = { meta: null, notes: {}, images: {} };
-    
-    result.meta = await this.getMeta();
-    
-    const getStoreData = (name) => {
-      return new Promise((resolve) => {
-        const tx = database.transaction(name, 'readonly');
-        const store = tx.objectStore(name);
-        const request = store.openCursor();
-        const data = {};
-        request.onsuccess = (e) => {
-          const cursor = e.target.result;
-          if (cursor) {
-            data[cursor.key] = cursor.value;
-            cursor.continue();
-          } else {
-            resolve(data);
+    try {
+      const meta = await this.getMeta();
+      const result = { meta: meta, notes: {} };
+      if (meta && meta.notes) {
+        for (const note of meta.notes) {
+          const noteData = await this.getNote(note.id);
+          if (noteData) {
+            result.notes[note.id] = noteData;
           }
-        };
-      });
-    };
-
-    result.notes = await getStoreData('notes');
-    // We don't export images in the JSON to keep it small, 
-    // or we could base64 them but that's risky for size.
-    // For now, let's just do meta and notes.
-    return result;
+        }
+      }
+      return result;
+    } catch (e) {
+      console.error(e);
+      return { meta: null, notes: {} };
+    }
   },
 
   async importAll(data) {
-    if (data.meta) await this.saveMeta(data.meta);
-    if (data.notes) {
-      for (const [id, note] of Object.entries(data.notes)) {
-        await this.saveNote(id, note);
+    try {
+      if (data.meta) await this.saveMeta(data.meta);
+      if (data.notes) {
+        for (const [id, note] of Object.entries(data.notes)) {
+          await this.saveNote(id, note);
+        }
       }
+    } catch (e) {
+      console.error(e);
     }
   }
 };
@@ -1366,19 +1862,10 @@ async function fetchAndLoadTab(id) {
   if (typeof updateZoomLabel === 'function') updateZoomLabel();
   if (typeof drawGrid === 'function') drawGrid();
   
-  // Resolve image blobs
+  // Preload images
   for (const s of strokes) {
     if (s.tool === 'image' && s.url) {
-      // If it's a key from DB, fetch and create blob URL
-      if (!s.url.startsWith('blob:') && !s.url.startsWith('data:') && !s.url.startsWith('/uploads/')) {
-        const blob = await db.getImage(s.url);
-        if (blob) {
-          s.dbKey = s.url;
-          s.url = URL.createObjectURL(blob);
-        }
-      } else {
-        preloadImage(s.url);
-      }
+      preloadImage(s.url);
     }
   }
 }
@@ -1444,29 +1931,8 @@ async function saveStrokes() {
   const cur = tabs.find(t => t.id === activeTab);
   if (!cur) return;
   
-  // Clone strokes and restore DB keys for images
-  const strokesToSave = strokes.map(s => {
-    if (s.tool === 'image' && s.dbKey) {
-      const cloned = { ...s };
-      cloned.url = s.dbKey;
-      delete cloned.dbKey;
-      return cloned;
-    }
-    return s;
-  });
-
-  const redoToSave = redoStack.map(s => {
-    if (s.tool === 'image' && s.dbKey) {
-      const cloned = { ...s };
-      cloned.url = s.dbKey;
-      delete cloned.dbKey;
-      return cloned;
-    }
-    return s;
-  });
-  
-  cur.strokes = strokesToSave;
-  cur.redoStack = redoToSave;
+  cur.strokes = [...strokes];
+  cur.redoStack = [...redoStack];
   
   try {
     await db.saveNote(cur.id, { 
@@ -1550,9 +2016,8 @@ drawCanvas.addEventListener('drop', async (e) => {
 
 async function uploadAndInsertImage(file, x, y) {
   try {
-    const name = Date.now() + '-' + file.name;
-    await db.saveImage(name, file);
-    const url = URL.createObjectURL(file);
+    const data = await db.saveImage(file);
+    const url = data.url;
     const img = preloadImage(url);
     img.onload = () => {
       const aspect = img.width / img.height;
@@ -1562,7 +2027,6 @@ async function uploadAndInsertImage(file, x, y) {
         id: Date.now().toString(),
         tool: 'image',
         url: url,
-        dbKey: name,
         x: x - w / 2,
         y: y - h / 2,
         w: w,
@@ -1574,8 +2038,8 @@ async function uploadAndInsertImage(file, x, y) {
       showTip('Image inserted');
     };
   } catch (err) {
-    console.error('Save failed', err);
-    showTip('Save failed');
+    console.error('Upload failed', err);
+    showTip('Upload failed');
   }
 }
 function resize() {
@@ -1602,51 +2066,80 @@ function drawGrid() {
   const dpr = window.devicePixelRatio || 1;
   const w = dotCanvas.width, h = dotCanvas.height;
   const styles = getComputedStyle(document.documentElement);
-  const bg = styles.getPropertyValue('--canvas-bg').trim();
-  const gridCol = styles.getPropertyValue('--dot-color').trim();
+  
+  // Warm paper color in light mode, dark paper in dark mode
+  const bg = theme === 'light' ? '#faf9f6' : '#1c1d1f';
+  // Use solid dark lines in dark mode to completely get rid of white gridlines
+  const ruledColor = theme === 'light' ? 'rgba(0, 100, 200, 0.05)' : 'rgba(100, 116, 139, 0.15)';
+  const marginColor = theme === 'light' ? 'rgba(220, 50, 50, 0.18)' : 'rgba(220, 50, 50, 0.12)';
 
   dotCtx.clearRect(0, 0, w, h);
   
-  // Skip grid if too small
-  if (scale < 0.15) {
-    dotCtx.fillStyle = bg;
-    dotCtx.fillRect(0, 0, w, h);
-    return;
-  }
-
   dotCtx.save();
   dotCtx.scale(dpr, dpr);
 
   dotCtx.fillStyle = bg;
   dotCtx.fillRect(0, 0, w / dpr, h / dpr);
 
-  let spacing = 22 * scale;
-  if (scale < 0.5) {
-    spacing *= 2;
+  if (bgGridStyle === 'blank') {
+    dotCtx.restore();
+    return;
   }
-  
-  const ox = ((offsetX % spacing) + spacing) % spacing;
-  const oy = ((offsetY % spacing) + spacing) % spacing;
 
-  dotCtx.strokeStyle = gridCol;
-  dotCtx.lineWidth = Math.max(0.5, 0.8 * scale);
+  // Spacing (e.g. 28 pixels in world coordinates)
+  const spacing = 28 * scale;
   
-  const xLimit = (w / dpr) + spacing;
-  const yLimit = (h / dpr) + spacing;
-  
-  dotCtx.beginPath();
-  for (let x = ox - spacing; x < xLimit; x += spacing) {
-    dotCtx.moveTo(x, 0);
-    dotCtx.lineTo(x, h / dpr);
+  if (scale > 0.15) {
+    const oy = ((offsetY % spacing) + spacing) % spacing;
+    const ox = ((offsetX % spacing) + spacing) % spacing;
+    
+    if (bgGridStyle === 'ruled' || bgGridStyle === 'grid') {
+      dotCtx.strokeStyle = ruledColor;
+      dotCtx.lineWidth = Math.max(0.5, 0.7 * scale);
+      
+      // Draw horizontal lines
+      dotCtx.beginPath();
+      for (let y = oy - spacing; y < (h / dpr) + spacing; y += spacing) {
+        dotCtx.moveTo(0, y);
+        dotCtx.lineTo(w / dpr, y);
+      }
+      dotCtx.stroke();
+      
+      if (bgGridStyle === 'grid') {
+        // Draw vertical lines
+        dotCtx.beginPath();
+        for (let x = ox - spacing; x < (w / dpr) + spacing; x += spacing) {
+          dotCtx.moveTo(x, 0);
+          dotCtx.lineTo(x, h / dpr);
+        }
+        dotCtx.stroke();
+      } else {
+        // Ruled margin line (only in ruled mode)
+        const marginX = 80 * scale + offsetX;
+        dotCtx.strokeStyle = marginColor;
+        dotCtx.lineWidth = Math.max(0.6, 1.0 * scale);
+        dotCtx.beginPath();
+        dotCtx.moveTo(marginX, 0);
+        dotCtx.lineTo(marginX, h / dpr);
+        dotCtx.stroke();
+      }
+    } else if (bgGridStyle === 'dots') {
+      dotCtx.fillStyle = theme === 'light' ? 'rgba(0, 0, 0, 0.15)' : 'rgba(255, 255, 255, 0.2)';
+      const dotSize = Math.max(0.7, 1.0 * scale);
+      
+      for (let x = ox - spacing; x < (w / dpr) + spacing; x += spacing) {
+        for (let y = oy - spacing; y < (h / dpr) + spacing; y += spacing) {
+          dotCtx.beginPath();
+          dotCtx.arc(x, y, dotSize, 0, Math.PI * 2);
+          dotCtx.fill();
+        }
+      }
+    }
   }
-  for (let y = oy - spacing; y < yLimit; y += spacing) {
-    dotCtx.moveTo(0, y);
-    dotCtx.lineTo(w / dpr, y);
-  }
-  dotCtx.stroke();
   
   dotCtx.restore();
 }
+
 
 // ═══════════════════════════════════════════════════════════
 // COORDINATE HELPERS
@@ -1701,7 +2194,7 @@ function renderAll(preview) {
     drawCtx.strokeRect(bounds.x, bounds.y, bounds.w, bounds.h);
     
     // Draw handle
-    drawCtx.fillStyle = '#fff';
+    drawCtx.fillStyle = theme === 'light' ? '#fff' : '#222';
     const handleSize = 8 / scale;
     drawCtx.fillRect(bounds.x + bounds.w - handleSize/2, bounds.y + bounds.h - handleSize/2, handleSize, handleSize);
     drawCtx.strokeRect(bounds.x + bounds.w - handleSize/2, bounds.y + bounds.h - handleSize/2, handleSize, handleSize);
@@ -1728,7 +2221,7 @@ function drawStroke(ctx, s) {
       color = getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
     }
     ctx.fillStyle = color;
-    ctx.font = `${s.size * 5}px 'DM Sans', sans-serif`;
+    ctx.font = `${s.size * 5}px 'Caveat', Georgia, serif`;
     ctx.textBaseline = 'top';
     ctx.fillText(s.text, s.x, s.y);
     return;
@@ -1747,7 +2240,7 @@ function drawStroke(ctx, s) {
         ctx.strokeRect(s.x, s.y, s.w, s.h);
 
         // Draw resize handles
-        ctx.fillStyle = '#fff';
+        ctx.fillStyle = theme === 'light' ? '#fff' : '#222';
         ctx.strokeStyle = 'rgba(92, 79, 255, 1)';
         ctx.lineWidth = 1 / scale;
         const handleSize = 8 / scale;
@@ -2281,6 +2774,48 @@ drawCanvas.addEventListener('wheel', (e) => {
 
 // Space key for pan
 document.addEventListener('keydown', (e) => {
+  // Handle Cmd+K / Ctrl+K
+  if ((e.ctrlKey || e.metaKey) && e.code === 'KeyK') {
+    e.preventDefault();
+    toggleCommandPalette();
+    return;
+  }
+
+  if (commandPaletteOpen) {
+    if (e.code === 'ArrowDown') {
+      e.preventDefault();
+      e.stopPropagation();
+      if (commandPaletteFilteredItems.length > 0) {
+        commandPaletteSelectedIndex = (commandPaletteSelectedIndex + 1) % commandPaletteFilteredItems.length;
+        renderCommandPaletteResults(document.getElementById('command-palette-input').value);
+      }
+      return;
+    }
+    if (e.code === 'ArrowUp') {
+      e.preventDefault();
+      e.stopPropagation();
+      if (commandPaletteFilteredItems.length > 0) {
+        commandPaletteSelectedIndex = (commandPaletteSelectedIndex - 1 + commandPaletteFilteredItems.length) % commandPaletteFilteredItems.length;
+        renderCommandPaletteResults(document.getElementById('command-palette-input').value);
+      }
+      return;
+    }
+    if (e.code === 'Enter') {
+      e.preventDefault();
+      e.stopPropagation();
+      executeCommandAtIndex(commandPaletteSelectedIndex);
+      return;
+    }
+    if (e.code === 'Escape') {
+      e.preventDefault();
+      e.stopPropagation();
+      toggleCommandPalette();
+      return;
+    }
+    // Prevent typing from triggering editor hotkeys
+    return;
+  }
+
   if (e.code === 'Space' && !e.target.matches('input, textarea') && !e.target.isContentEditable) {
     if (!spaceDown) {
       spaceDown = true;
@@ -2291,6 +2826,32 @@ document.addEventListener('keydown', (e) => {
   
   if (e.code === 'KeyS' && !e.target.matches('input, textarea') && !e.target.isContentEditable) {
     setTool('select');
+  }
+
+  // Keyboard shortcuts for tools (Pen = P, Pencil = B, Marker = M, Eraser = E)
+  if (!e.target.matches('input, textarea') && !e.target.isContentEditable && !e.ctrlKey && !e.metaKey && !e.altKey) {
+    if (e.code === 'KeyP') setTool('pen');
+    if (e.code === 'KeyB') setTool('pencil');
+    if (e.code === 'KeyM') setTool('marker');
+    if (e.code === 'KeyE') setTool('eraser');
+  }
+
+  // Keyboard shortcuts for colors (1 to 7, Numpad 1 to 7)
+  if (!e.target.matches('input, textarea') && !e.target.isContentEditable && !e.ctrlKey && !e.metaKey && !e.altKey) {
+    let colorIdx = -1;
+    if (e.code >= 'Digit1' && e.code <= 'Digit7') {
+      colorIdx = parseInt(e.code.substring(5)) - 1;
+    } else if (e.code >= 'Numpad1' && e.code <= 'Numpad7') {
+      colorIdx = parseInt(e.code.substring(6)) - 1;
+    } else if (e.key >= '1' && e.key <= '7') {
+      colorIdx = parseInt(e.key) - 1;
+    }
+    if (colorIdx >= 0 && colorIdx < 7) {
+      const swatches = document.querySelectorAll('.color-swatch');
+      if (swatches[colorIdx]) {
+        setColor(swatches[colorIdx]);
+      }
+    }
   }
   
   if ((e.ctrlKey || e.metaKey) && e.code === 'KeyC') {
@@ -2327,6 +2888,12 @@ document.addEventListener('keydown', (e) => {
 
   if ((e.ctrlKey || e.metaKey) && e.code === 'KeyZ') { e.shiftKey ? redoStroke() : undoStroke(); e.preventDefault(); }
   if ((e.ctrlKey || e.metaKey) && (e.code === 'KeyY')) { redoStroke(); e.preventDefault(); }
+  if ((e.ctrlKey || e.metaKey) && e.code === 'KeyE') {
+    if (!e.target.matches('input, textarea') && !e.target.isContentEditable) {
+      e.preventDefault();
+      exportToImage();
+    }
+  }
 });
 document.addEventListener('keyup', (e) => {
   if (e.code === 'Space') {
@@ -2409,6 +2976,9 @@ function setColor(el) {
   currentColor = el.dataset.color;
   document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('active'));
   el.classList.add('active');
+  const title = el.getAttribute('title') || '';
+  const name = title.split(' (')[0];
+  showTip('Color: ' + name);
 }
 
 function setBrushSize(val) {
@@ -2451,9 +3021,9 @@ function toggleTheme() {
   document.documentElement.setAttribute('data-theme', theme);
   const icon = document.getElementById('theme-icon');
   if (theme === 'dark') {
-    icon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>';
+    icon.innerHTML = '<path d="M21.37 14A9 9 0 0 1 9.71 3.5a1 1 0 0 0-1 .92 9 9 0 1 0 11.75 11.75 1 1 0 0 0-.09-2.17z"/>';
   } else {
-    icon.innerHTML = '<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>';
+    icon.innerHTML = '<path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58a.996.996 0 0 0-1.41 0 .996.996 0 0 0 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37a.996.996 0 0 0-1.41 0 .996.996 0 0 0 0 1.41l1.06 1.06c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41l-1.06-1.06zm-12.37 1.06l1.06-1.06c.39-.39.39-1.03 0-1.41s-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0zm13.78-12.37l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06c.39-.39.39-1.03 0-1.41s-1.03-.39-1.41 0z"/>';
   }
   drawGrid();
   renderAll();
@@ -2532,22 +3102,17 @@ async function closeTab(e, id) {
 }
 function renderTabs() {
   const el = document.getElementById('tabs');
-  const filteredTabs = tabs.filter(t => openTabs.includes(t.id)).filter(t => {
-    if (currentNotebookId === 'all') return true;
-    if (currentNotebookId === 'recent') return true;
-    if (currentNotebookId === 'starred') return t.starred;
-    if (currentNotebookId === 'trash') return t.trash;
-    if (currentNotebookId.startsWith('tag-')) {
-      const tagName = currentNotebookId.replace('tag-', '').toLowerCase();
-      return (t.tags || []).some(tag => tag.toLowerCase() === tagName);
-    }
-    return t.notebookId === currentNotebookId;
-  });
+  const filteredTabs = openTabs.map(id => tabs.find(t => t.id === id)).filter(Boolean);
 
   el.innerHTML = filteredTabs.map(t => `
     <div class="tab ${t.id === activeTab ? 'active' : ''}" onclick="switchTab('${t.id}')">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="opacity:0.6"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
-      <span contenteditable="true" spellcheck="false" onclick="event.stopPropagation()" onblur="renameNote('${t.id}', this.innerText)" onkeydown="if(event.key==='Enter'){event.preventDefault();this.blur()}">${t.title}</span>
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" style="opacity:0.8"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+      ${t.id === 'scratchpad' ? `<span>${t.title}</span>` : `
+      <span contenteditable="false" spellcheck="false" title="Double click to rename"
+            ondblclick="this.contentEditable=true; this.focus();" 
+            onblur="this.contentEditable=false; renameNote('${t.id}', this.innerText)" 
+            onkeydown="if(event.key==='Enter'){event.preventDefault();this.blur()}">${t.title}</span>
+      `}
       ${t.isCover ? '' : `<span class="tab-close" onclick="closeTab(event, '${t.id}')">×</span>`}
     </div>
   `).join('');
@@ -2587,12 +3152,12 @@ function renderHome() {
         </div>
         <div class="home-note-list">
           ${nbNotes.map(t => `
-            <div class="home-note-card" onclick="switchTab('${t.id}')">
+            <div class="home-note-card" onclick="switchTab('${t.id}')" style="--book-color: ${nb.color}">
               <div class="home-note-title">${t.title}</div>
-              <div class="home-note-meta">Open note</div>
+              <div class="home-note-meta">Open Note</div>
             </div>
           `).join('')}
-          <div class="home-note-card" onclick="currentNotebookId='${nb.id}'; newTab()" style="border-style:dashed; display:flex; align-items:center; justify-content:center; color:var(--text); opacity:0.7">
+          <div class="home-note-card new-note-btn" onclick="currentNotebookId='${nb.id}'; newTab()">
             <span style="font-size:20px; margin-right:8px">+</span> New Note
           </div>
         </div>
@@ -2612,9 +3177,9 @@ function renderHome() {
         </div>
         <div class="home-note-list">
           ${unassignedNotes.map(t => `
-            <div class="home-note-card" onclick="switchTab('${t.id}')">
+            <div class="home-note-card" onclick="switchTab('${t.id}')" style="--book-color: #555566">
               <div class="home-note-title">${t.title}</div>
-              <div class="home-note-meta">Open note</div>
+              <div class="home-note-meta">Open Note</div>
             </div>
           `).join('')}
         </div>
@@ -2625,6 +3190,7 @@ function renderHome() {
   html += `</div>`;
   homeGrid.innerHTML = html;
 }
+
 
 async function toggleSettings() {
   const choice = await showModal({
@@ -2918,9 +3484,8 @@ imageInput.addEventListener('change', async (e) => {
   if (!file) return;
 
   try {
-    const name = Date.now() + '-' + file.name;
-    await db.saveImage(name, file);
-    const url = URL.createObjectURL(file);
+    const data = await db.saveImage(file);
+    const url = data.url;
     const world = toWorld(wrap.clientWidth / 2, wrap.clientHeight / 2);
     const img = preloadImage(url);
     img.onload = () => {
@@ -2928,9 +3493,9 @@ imageInput.addEventListener('change', async (e) => {
       const w = 300;
       const h = w / aspect;
       strokes.push({
+        id: Date.now().toString(),
         tool: 'image',
         url: url,
-        dbKey: name,
         x: world.x - w / 2,
         y: world.y - h / 2,
         w: w,
@@ -2942,10 +3507,489 @@ imageInput.addEventListener('change', async (e) => {
       showTip('Image inserted');
     };
   } catch (err) {
-    console.error('Save failed', err);
-    showTip('Save failed');
+    console.error('Upload failed', err);
+    showTip('Upload failed');
   }
   imageInput.value = '';
+});
+// ═══════════════════════════════════════════════════════════
+// EXPORT SCRATCHPAD
+// ═══════════════════════════════════════════════════════════
+async function exportScratchpadToNote() {
+  let scratchStrokes = [];
+  let scratchRedo = [];
+  
+  if (activeTab === 'scratchpad') {
+    scratchStrokes = JSON.parse(JSON.stringify(strokes));
+    scratchRedo = JSON.parse(JSON.stringify(redoStack));
+  } else {
+    // Try to get from tabs memory
+    const pad = tabs.find(t => t.id === 'scratchpad');
+    if (pad && pad.strokes !== undefined) {
+      scratchStrokes = JSON.parse(JSON.stringify(pad.strokes));
+      scratchRedo = JSON.parse(JSON.stringify(pad.redoStack || []));
+    } else {
+      // Fetch from DB
+      const data = await db.getNote('scratchpad');
+      if (data) {
+        scratchStrokes = data.strokes || [];
+        scratchRedo = data.redoStack || [];
+      }
+    }
+  }
+
+  if (!scratchStrokes || scratchStrokes.length === 0) {
+    showTip('Scratchpad is empty. Nothing to export!');
+    return;
+  }
+
+  // Ask for a title
+  const noteTitle = await showModal({
+    title: 'Export Scratchpad to Note',
+    body: 'Enter a title for the new note:',
+    showInput: true,
+    defaultValue: 'Scratchpad Export ' + new Date().toLocaleDateString()
+  });
+
+  if (noteTitle === null) return; // user cancelled
+
+  const id = Date.now().toString();
+  const notebookId = currentNotebookId.startsWith('nb-') ? currentNotebookId : (notebooks.length > 0 ? notebooks[0].id : null);
+  
+  const newNote = {
+    id,
+    title: noteTitle.trim() || 'Untitled scratchpad note',
+    strokes: scratchStrokes,
+    redoStack: scratchRedo,
+    notebookId: notebookId
+  };
+
+  tabs.push(newNote);
+  if (!openTabs.includes(id)) openTabs.push(id);
+  
+  // Save note content immediately
+  await db.saveNote(id, {
+    strokes: scratchStrokes,
+    redoStack: scratchRedo,
+    viewState: { offsetX: 0, offsetY: 0, scale: 1 }
+  });
+
+  // Save metadata
+  await saveMeta();
+
+  // Switch to the newly created note
+  await switchTab(id);
+  showTip('Scratchpad exported to note!');
+}
+
+// ═══════════════════════════════════════════════════════════
+// EXPORT NOTE TO IMAGE
+// ═══════════════════════════════════════════════════════════
+function exportToImage() {
+  if (strokes.length === 0) {
+    showTip('Canvas is empty. Nothing to export!');
+    return;
+  }
+
+  const bounds = getDrawnAreaBounds();
+  if (!bounds) {
+    showTip('Canvas is empty. Nothing to export!');
+    return;
+  }
+
+  const padding = 20;
+  const x1 = bounds.x1 - padding;
+  const y1 = bounds.y1 - padding;
+  const x2 = bounds.x2 + padding;
+  const y2 = bounds.y2 + padding;
+  const w = x2 - x1;
+  const h = y2 - y1;
+
+  const modal = document.getElementById('export-modal-overlay');
+  const infoEl = document.getElementById('export-modal-info');
+  const filenameInput = document.getElementById('export-filename');
+  const scaleSelect = document.getElementById('export-scale');
+  const bgSelect = document.getElementById('export-bg');
+
+  const curTab = tabs.find(t => t.id === activeTab);
+  const title = curTab ? curTab.title : 'note';
+  filenameInput.value = title.replace(/[^a-z0-9_-]/gi, '_');
+
+  infoEl.textContent = `Drawn Area: ${Math.round(w)} x ${Math.round(h)} px`;
+
+  modal.classList.add('active');
+
+  return new Promise((resolve) => {
+    const cancelBtn = document.getElementById('export-modal-cancel');
+    const confirmBtn = document.getElementById('export-modal-confirm');
+
+    const close = () => {
+      modal.classList.remove('active');
+      cancelBtn.onclick = null;
+      confirmBtn.onclick = null;
+    };
+
+    cancelBtn.onclick = () => {
+      close();
+      resolve(false);
+    };
+
+    confirmBtn.onclick = async () => {
+      const exportScale = parseFloat(scaleSelect.value) || 3;
+      const exportBg = bgSelect.value;
+      const fileName = (filenameInput.value.trim() || 'note') + '.png';
+
+      close();
+
+      showTip('Preparing export...');
+
+      // Make sure all images are loaded
+      await ensureAllImagesLoaded();
+
+      // Create temporary canvas
+      const exportCanvas = document.createElement('canvas');
+      exportCanvas.width = w * exportScale;
+      exportCanvas.height = h * exportScale;
+      const exportCtx = exportCanvas.getContext('2d');
+
+      // Save selection states
+      const savedSelectionRect = selectionRect;
+      const savedSelectedStrokes = [...selectedStrokes];
+      const savedSpaceDown = spaceDown;
+      const savedCurrentTool = currentTool;
+
+      // Clear selection for clean render
+      selectionRect = null;
+      selectedStrokes = [];
+      spaceDown = false;
+      if (currentTool === 'pan') {
+        currentTool = 'pencil';
+      }
+
+      // Draw background
+      if (exportBg !== 'transparent') {
+        const bg = theme === 'light' ? '#faf9f6' : '#1c1d1f';
+        exportCtx.fillStyle = bg;
+        exportCtx.fillRect(0, 0, exportCanvas.width, exportCanvas.height);
+
+        if (exportBg === 'theme-grid' && bgGridStyle !== 'blank') {
+          const ruledColor = theme === 'light' ? 'rgba(0, 100, 200, 0.05)' : 'rgba(100, 116, 139, 0.15)';
+          const marginColor = theme === 'light' ? 'rgba(220, 50, 50, 0.18)' : 'rgba(220, 50, 50, 0.12)';
+
+          exportCtx.save();
+          exportCtx.scale(exportScale, exportScale);
+          exportCtx.translate(-x1, -y1);
+
+          if (bgGridStyle === 'ruled' || bgGridStyle === 'grid') {
+            exportCtx.strokeStyle = ruledColor;
+            exportCtx.lineWidth = 0.7;
+
+            // Horizontal lines
+            exportCtx.beginPath();
+            const startY = Math.ceil(y1 / 28) * 28;
+            for (let y = startY; y <= y2; y += 28) {
+              exportCtx.moveTo(x1, y);
+              exportCtx.lineTo(x2, y);
+            }
+            exportCtx.stroke();
+
+            if (bgGridStyle === 'grid') {
+              // Vertical lines
+              exportCtx.beginPath();
+              const startX = Math.ceil(x1 / 28) * 28;
+              for (let x = startX; x <= x2; x += 28) {
+                exportCtx.moveTo(x, y1);
+                exportCtx.lineTo(x, y2);
+              }
+              exportCtx.stroke();
+            } else {
+              // Ruled margin line (only in ruled mode)
+              if (x1 <= 80 && x2 >= 80) {
+                exportCtx.strokeStyle = marginColor;
+                exportCtx.lineWidth = 1.0;
+                exportCtx.beginPath();
+                exportCtx.moveTo(80, y1);
+                exportCtx.lineTo(80, y2);
+                exportCtx.stroke();
+              }
+            }
+          } else if (bgGridStyle === 'dots') {
+            exportCtx.fillStyle = theme === 'light' ? 'rgba(0, 0, 0, 0.15)' : 'rgba(255, 255, 255, 0.2)';
+            const dotSize = 1.0;
+
+            const startX = Math.ceil(x1 / 28) * 28;
+            const startY = Math.ceil(y1 / 28) * 28;
+
+            for (let x = startX; x <= x2; x += 28) {
+              for (let y = startY; y <= y2; y += 28) {
+                exportCtx.beginPath();
+                exportCtx.arc(x, y, dotSize, 0, Math.PI * 2);
+                exportCtx.fill();
+              }
+            }
+          }
+          exportCtx.restore();
+        }
+      }
+
+      // Draw clean drawing onto export canvas
+      exportCtx.save();
+      exportCtx.scale(exportScale, exportScale);
+      exportCtx.translate(-x1, -y1);
+
+      for (const s of strokes) {
+        drawStroke(exportCtx, s);
+      }
+
+      exportCtx.restore();
+
+      // Restore selection states
+      selectionRect = savedSelectionRect;
+      selectedStrokes = savedSelectedStrokes;
+      spaceDown = savedSpaceDown;
+      currentTool = savedCurrentTool;
+
+      try {
+        // Trigger download
+        const dataUrl = exportCanvas.toDataURL('image/png');
+        const link = document.createElement('a');
+        link.download = fileName;
+        link.href = dataUrl;
+        link.click();
+        showTip('Exported note to image');
+        resolve(true);
+      } catch (err) {
+        console.error('Failed to export to image:', err);
+        showTip('Failed to export to image');
+        resolve(false);
+      }
+    };
+  });
+}
+
+function getDrawnAreaBounds() {
+  if (strokes.length === 0) return null;
+  let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+  for (const s of strokes) {
+    const b = getStrokeBounds(s);
+    minX = Math.min(minX, b.x1);
+    minY = Math.min(minY, b.y1);
+    maxX = Math.max(maxX, b.x2);
+    maxY = Math.max(maxY, b.y2);
+  }
+  if (minX === Infinity || minY === Infinity || maxX === -Infinity || maxY === -Infinity) {
+    return null;
+  }
+  return { x1: minX, y1: minY, x2: maxX, y2: maxY };
+}
+
+function ensureAllImagesLoaded() {
+  const images = [];
+  for (const s of strokes) {
+    if (s.tool === 'image') {
+      images.push(preloadImage(s.url));
+    }
+  }
+  const promises = images.map(img => {
+    if (img.complete) return Promise.resolve();
+    return new Promise(resolve => {
+      img.addEventListener('load', resolve, { once: true });
+      img.addEventListener('error', resolve, { once: true });
+    });
+  });
+  return Promise.all(promises);
+}
+
+// ═══════════════════════════════════════════════════════════
+// COMMAND PALETTE
+// ═══════════════════════════════════════════════════════════
+let commandPaletteOpen = false;
+let commandPaletteFilteredItems = [];
+let commandPaletteSelectedIndex = 0;
+
+const commandPaletteItems = [
+  // Background style choices
+  { id: 'bg-ruled', label: 'Switch to Ruled Background', category: 'Background', action: () => { bgGridStyle = 'ruled'; localStorage.setItem('bgGridStyle', 'ruled'); drawGrid(); showTip('Background: Ruled'); } },
+  { id: 'bg-grid', label: 'Switch to Grid Background', category: 'Background', action: () => { bgGridStyle = 'grid'; localStorage.setItem('bgGridStyle', 'grid'); drawGrid(); showTip('Background: Grid'); } },
+  { id: 'bg-dots', label: 'Switch to Dot Grid Background', category: 'Background', action: () => { bgGridStyle = 'dots'; localStorage.setItem('bgGridStyle', 'dots'); drawGrid(); showTip('Background: Dots'); } },
+  { id: 'bg-blank', label: 'Switch to Blank Background', category: 'Background', action: () => { bgGridStyle = 'blank'; localStorage.setItem('bgGridStyle', 'blank'); drawGrid(); showTip('Background: Blank'); } },
+  
+  // Scratchpad export
+  { id: 'export-scratchpad', label: 'Export Scratchpad to a Note', category: 'Actions', action: () => { exportScratchpadToNote(); } },
+  { id: 'export-image', label: 'Export Note to Image (PNG)', category: 'Actions', action: () => { exportToImage(); } },
+
+  // Settings & Theme
+  { id: 'toggle-settings', label: 'Open Settings (Import/Export Library)', category: 'Settings', action: () => { toggleSettings(); } },
+  { id: 'toggle-theme', label: 'Toggle Dark/Light Theme', category: 'Settings', action: () => { toggleTheme(); } },
+  { id: 'clear-canvas', label: 'Clear Canvas', category: 'Actions', action: () => { clearCanvas(); } },
+  { id: 'manage-tags', label: 'Manage Tags for Note', category: 'Actions', action: () => { manageNoteTags(); } },
+  { id: 'insert-image', label: 'Insert Image', category: 'Actions', action: () => { insertImage(); } },
+  
+  // Tools
+  { id: 'tool-pen', label: 'Tool: Pen', category: 'Tools', action: () => { setTool('pen'); } },
+  { id: 'tool-pencil', label: 'Tool: Pencil', category: 'Tools', action: () => { setTool('pencil'); } },
+  { id: 'tool-marker', label: 'Tool: Marker / Highlighter', category: 'Tools', action: () => { setTool('marker'); } },
+  { id: 'tool-eraser', label: 'Tool: Eraser', category: 'Tools', action: () => { setTool('eraser'); } },
+  { id: 'tool-select', label: 'Tool: Selection Tool', category: 'Tools', action: () => { setTool('select'); } },
+  { id: 'tool-circle', label: 'Tool: Draw Circle', category: 'Tools', action: () => { setTool('circle'); } },
+  { id: 'tool-oval', label: 'Tool: Draw Oval', category: 'Tools', action: () => { setTool('oval'); } },
+  { id: 'tool-rect', label: 'Tool: Draw Rectangle', category: 'Tools', action: () => { setTool('rect'); } },
+  { id: 'tool-line', label: 'Tool: Draw Line', category: 'Tools', action: () => { setTool('line'); } },
+  { id: 'tool-text', label: 'Tool: Draw Text', category: 'Tools', action: () => { setTool('text'); } },
+  { id: 'tool-pan', label: 'Tool: Pan Canvas', category: 'Tools', action: () => { setTool('pan'); } },
+];
+
+function getDynamicCommandItems() {
+  const dynamicItems = [...commandPaletteItems];
+  
+  // Add tabs as options
+  openTabs.forEach(tabId => {
+    const tabObj = tabs.find(t => t.id === tabId);
+    if (tabObj) {
+      dynamicItems.push({
+        id: `switch-tab-${tabId}`,
+        label: `Switch to Tab: ${tabObj.title}`,
+        category: 'Tabs',
+        action: () => { switchTab(tabId); }
+      });
+    }
+  });
+
+  return dynamicItems;
+}
+
+function toggleCommandPalette() {
+  const backdrop = document.getElementById('command-palette-backdrop');
+  const input = document.getElementById('command-palette-input');
+  
+  if (commandPaletteOpen) {
+    backdrop.classList.remove('visible');
+    commandPaletteOpen = false;
+    input.blur();
+  } else {
+    backdrop.classList.add('visible');
+    commandPaletteOpen = true;
+    input.value = '';
+    commandPaletteSelectedIndex = 0;
+    renderCommandPaletteResults('');
+    setTimeout(() => {
+      input.focus();
+    }, 50);
+  }
+}
+
+function closeCommandPalette(e) {
+  if (commandPaletteOpen) {
+    toggleCommandPalette();
+  }
+}
+
+function renderCommandPaletteResults(query) {
+  const container = document.getElementById('command-palette-results');
+  const items = getDynamicCommandItems();
+  
+  // Filter items
+  const normalizedQuery = query.toLowerCase().trim();
+  let filtered = items;
+  if (normalizedQuery) {
+    filtered = items.filter(item => 
+      item.label.toLowerCase().includes(normalizedQuery) ||
+      item.category.toLowerCase().includes(normalizedQuery)
+    );
+  }
+  
+  // Group by category
+  const categories = {};
+  filtered.forEach(item => {
+    if (!categories[item.category]) {
+      categories[item.category] = [];
+    }
+    categories[item.category].push(item);
+  });
+  
+  // Flatten for keyboard navigation indexing
+  commandPaletteFilteredItems = [];
+  let html = '';
+  
+  const orderedCategories = ['Tabs', 'Tools', 'Background', 'Actions', 'Settings'];
+  
+  orderedCategories.forEach(cat => {
+    if (categories[cat] && categories[cat].length > 0) {
+      html += `<div class="command-palette-group-header">${cat}</div>`;
+      categories[cat].forEach(item => {
+        const globalIndex = commandPaletteFilteredItems.length;
+        commandPaletteFilteredItems.push(item);
+        
+        const isSelected = globalIndex === commandPaletteSelectedIndex;
+        
+        // Find shortcuts if applicable
+        let shortcut = '';
+        if (item.id === 'tool-pen') shortcut = 'P';
+        else if (item.id === 'tool-pencil') shortcut = 'B';
+        else if (item.id === 'tool-marker') shortcut = 'M';
+        else if (item.id === 'tool-eraser') shortcut = 'E';
+        else if (item.id === 'tool-select') shortcut = 'S';
+        else if (item.id === 'toggle-theme') shortcut = 'Theme Toggle';
+        
+        html += `
+          <div class="command-palette-item ${isSelected ? 'selected' : ''}" 
+               data-index="${globalIndex}" 
+               onclick="executeCommandAtIndex(${globalIndex})">
+            <span>${item.label}</span>
+            ${shortcut ? `<span class="command-palette-shortcut">${shortcut}</span>` : ''}
+          </div>
+        `;
+      });
+    }
+  });
+  
+  // Also list other categories not in ordered list
+  Object.keys(categories).forEach(cat => {
+    if (!orderedCategories.includes(cat) && categories[cat].length > 0) {
+      html += `<div class="command-palette-group-header">${cat}</div>`;
+      categories[cat].forEach(item => {
+        const globalIndex = commandPaletteFilteredItems.length;
+        commandPaletteFilteredItems.push(item);
+        
+        const isSelected = globalIndex === commandPaletteSelectedIndex;
+        html += `
+          <div class="command-palette-item ${isSelected ? 'selected' : ''}" 
+               data-index="${globalIndex}" 
+               onclick="executeCommandAtIndex(${globalIndex})">
+            <span>${item.label}</span>
+          </div>
+        `;
+      });
+    }
+  });
+
+  if (commandPaletteFilteredItems.length === 0) {
+    html = `<div style="padding: 20px; text-align: center; opacity: 0.5; font-size: 13.5px;">No matching commands found</div>`;
+  }
+  
+  container.innerHTML = html;
+  
+  // Scroll selected item into view if necessary
+  const selectedEl = container.querySelector('.command-palette-item.selected');
+  if (selectedEl) {
+    selectedEl.scrollIntoView({ block: 'nearest' });
+  }
+}
+
+function executeCommandAtIndex(index) {
+  const item = commandPaletteFilteredItems[index];
+  if (item && item.action) {
+    toggleCommandPalette();
+    setTimeout(() => {
+      item.action();
+    }, 150);
+  }
+}
+
+// Bind input event to command palette search
+document.getElementById('command-palette-input').addEventListener('input', (e) => {
+  commandPaletteSelectedIndex = 0;
+  renderCommandPaletteResults(e.target.value);
 });
 
 // ═══════════════════════════════════════════════════════════
